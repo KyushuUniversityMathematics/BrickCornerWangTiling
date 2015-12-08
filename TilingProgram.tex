@@ -1,0 +1,2492 @@
+\documentclass[12pt]{report}
+\usepackage[]{inputenc}
+\usepackage[T1]{fontenc}
+\usepackage{fullpage}
+\usepackage{coqdoc}
+\usepackage{amsmath,amssymb}
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%% This file has been automatically generated with the command
+%% coqdoc -latex TilingProgram.v 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\coqlibrary{TilingProgram}{Library }{TilingProgram}
+
+\begin{coqdoccode}
+\coqdocemptyline
+\end{coqdoccode}
+
+\section{Preference}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Require} \coqdockw{Import} \coqdocvar{ssreflect} \coqdocvar{ssrnat}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Coercion} \coqdocvar{istrue} (\coqdocvar{b} : \coqdocvar{bool}) := \coqdocvar{is\_true} \coqdocvar{b}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+2 つの自然数が等しければ 0 を, 異なれば 1 を返す関数.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{eq\_to\_bin} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}) : \coqdocvar{nat} :=\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{n}, \coqdocvar{m} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{O}, \coqdocvar{O} \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{O}, \coqdocvar{S} \coqdocvar{m'} \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'}, \coqdocvar{O} \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'}, \coqdocvar{S} \coqdocvar{m'} \ensuremath{\Rightarrow} \coqdocvar{eq\_to\_bin} \coqdocvar{n'} \coqdocvar{m'}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{eq\_to\_bin\_iff} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}), \coqdocvar{n} = \coqdocvar{m} \ensuremath{\leftrightarrow} 0 = \coqdocvar{eq\_to\_bin} \coqdocvar{n} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}; \coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}; \coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{compute} \coqdoctac{in} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}; \coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{compute} \coqdoctac{in} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{simpl}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}; \coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{IHn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{injection} \coqdocvar{H}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{IHn} \coqdoctac{in} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} \coqdocvar{H}].\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{eq\_to\_bin\_nn} : \coqdockw{\ensuremath{\forall}} \coqdocvar{n} : \coqdocvar{nat}, \coqdocvar{eq\_to\_bin} \coqdocvar{n} \coqdocvar{n} = 0.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{Logic.eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} -\coqdocvar{eq\_to\_bin\_iff}].\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+2 つの自然数が等しければ $p$ を, 異なれば $q$ を返す関数.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{eq\_to\_if} (\coqdocvar{n} \coqdocvar{m} \coqdocvar{p} \coqdocvar{q} : \coqdocvar{nat}) : \coqdocvar{nat} :=\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{eq\_to\_bin} \coqdocvar{n} \coqdocvar{m} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{p}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{q}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+特定の $C0$ 以外なら何でもいい場合は, \verb|C_other2 C0| で他の色を求める.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{C\_other2} (\coqdocvar{C0} : \coqdocvar{nat}) : \coqdocvar{nat} :=\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{C0} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocnoindent
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{C\_other2\_neq} : \coqdockw{\ensuremath{\forall}} \coqdocvar{C0} : \coqdocvar{nat}, \coqdocvar{C0} \ensuremath{\not=} \coqdocvar{C\_other2} \coqdocvar{C0}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+3 色以上使える環境で, 色 $C0$ と $C1$ が指定されたとき, それらと異なる色を返す関数.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{C\_other3} (\coqdocvar{C0} \coqdocvar{C1} : \coqdocvar{nat}) : \coqdocvar{nat} :=\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{C0} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{C1} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} 2\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{C1} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 2\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{C1} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 1\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{C\_other3\_neq} :\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{\ensuremath{\forall}} (\coqdocvar{C0} \coqdocvar{C1} : \coqdocvar{nat}), \coqdocvar{C0} \ensuremath{\not=} \coqdocvar{C\_other3} \coqdocvar{C0} \coqdocvar{C1} \ensuremath{\land} \coqdocvar{C1} \ensuremath{\not=} \coqdocvar{C\_other3} \coqdocvar{C0} \coqdocvar{C1}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{C1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{simpl}].\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+\section{Wang tiling}
+境界条件とエッジ関数は, ともに ``$x$ 座標と $y$ 座標から色を返す関数'' である.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{boundary} := \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{edge} := \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+テスト用にプログラムを用いた Tiling を表示する関数も作ってみる.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{null} \{\coqdocvar{A} : \coqdockw{Type}\} (\coqdocvar{x} : \coqdocvar{A}): \coqdocvar{A}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{x}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "'\^{}'" := (\coqdocvar{null} 0).\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "'\#'" := (\coqdocvar{null} 1).\coqdoceol
+\coqdocnoindent
+\coqdockw{Open} \coqdockw{Scope} \coqdocvar{list\_scope}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_i} (\coqdocvar{j} : \coqdocvar{nat}) : \coqdocvar{edge} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{list} \coqdocvar{nat} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} (\coqdocvar{e} : \coqdocvar{edge})(\coqdocvar{i} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \^{} :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{j'} \ensuremath{\Rightarrow} (\coqdocvar{e\_i} \coqdocvar{j'} \coqdocvar{e} \coqdocvar{i}) ++ ((\coqdocvar{e} \coqdocvar{i} (\coqdocvar{S} \coqdocvar{j'})) :: \^{} :: \coqdocvar{nil})\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e'\_i} (\coqdocvar{j} : \coqdocvar{nat}) : \coqdocvar{edge} \ensuremath{\rightarrow} \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{list} \coqdocvar{nat} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} (\coqdocvar{e'} : \coqdocvar{edge})(\coqdocvar{i} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} (\coqdocvar{e'} \coqdocvar{i} 0) :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{j'} \ensuremath{\Rightarrow} (\coqdocvar{e'\_i} \coqdocvar{j'} \coqdocvar{e'} \coqdocvar{i}) ++ (\# :: (\coqdocvar{e'} \coqdocvar{i} (\coqdocvar{S} \coqdocvar{j'})) :: \coqdocvar{nil})\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_e'} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{e} \coqdocvar{e'} : \coqdocvar{edge}) : \coqdocvar{list} (\coqdocvar{list} \coqdocvar{nat}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} (\coqdocvar{e\_i} \coqdocvar{m} \coqdocvar{e} 0) :: \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'} \ensuremath{\Rightarrow} (\coqdocvar{e\_e'} \coqdocvar{n'} \coqdocvar{m} \coqdocvar{e} \coqdocvar{e'}) ++ ((\coqdocvar{e'\_i} \coqdocvar{m} \coqdocvar{e'} (\coqdocvar{S} \coqdocvar{n'})) :: (\coqdocvar{e\_i} \coqdocvar{m} \coqdocvar{e} (\coqdocvar{S} \coqdocvar{n'})) :: \coqdocvar{nil})\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{tiling} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{e\_} \coqdocvar{e'\_} : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge}) := \coqdocvar{e\_e'} \coqdocvar{n} \coqdocvar{m} (\coqdocvar{e\_} \coqdocvar{b}) (\coqdocvar{e'\_} \coqdocvar{b}).\coqdoceol
+\end{coqdoccode}
+ 長方形サイズ $n \times m$, 境界条件 \verb|b|, Tiling 関数 \verb|e_|, \verb|e'_| から実際の Tiling を求める関数  
+
+ 
+まずは $P_{12}$ を Tiling する関数から. \verb|e| は横エッジ用, \verb|e'| は縦エッジ用.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e\_12} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\end{coqdoccode}
+ 横エッジはそのまま, \verb|e 0 j = b 0 j|, \verb|e 1 j = b 2 j| とすればよい  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 2 \coqdocvar{j}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e'\_12} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\end{coqdoccode}
+ \verb|e' 1 0 = b 1 0|, \verb|e' 1 2 = b 1 3| なので, $j$ で induction  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 1 0\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{eq\_to\_if} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)\coqdoceol
+\coqdocindent{5.00em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 0 1) (\coqdocvar{b} 2 1) (\coqdocvar{C\_other2} (\coqdocvar{b} 1 0)) (\coqdocvar{b} 1 0))\coqdoceol
+\coqdocindent{5.00em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 0 1) (\coqdocvar{b} 2 1)\coqdoceol
+\coqdocindent{5.50em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 0 2) (\coqdocvar{b} 2 2) (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) (\coqdocvar{b} 1 3))\coqdoceol
+\coqdocindent{5.50em}
+(\coqdocvar{b} 1 0))\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 1 3\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+次に $P_{22}$ を Tiling する関数.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e\_22} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{eq\_to\_if} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)\coqdoceol
+\coqdocindent{5.00em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)\coqdoceol
+\coqdocindent{5.50em}
+(\coqdocvar{C\_other3} (\coqdocvar{b} 0 \coqdocvar{j}) (\coqdocvar{b} 3 \coqdocvar{j}))\coqdoceol
+\coqdocindent{5.50em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)\coqdoceol
+\coqdocindent{6.00em}
+(\coqdocvar{b} 0 \coqdocvar{j})\coqdoceol
+\coqdocindent{6.00em}
+(\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 0 0)\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 3 1\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 0 \coqdocvar{j})\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end})))\coqdoceol
+\coqdocindent{5.00em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)\coqdoceol
+\coqdocindent{5.50em}
+(\coqdocvar{eq\_to\_if} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)\coqdoceol
+\coqdocindent{6.00em}
+(\coqdocvar{b} 3 \coqdocvar{j})\coqdoceol
+\coqdocindent{6.00em}
+(\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 3 0)\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 0 1\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 3 \coqdocvar{j})\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end}))\coqdoceol
+\coqdocindent{5.50em}
+(\coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{7.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 3 2\coqdoceol
+\coqdocindent{7.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 0 1\coqdoceol
+\coqdocindent{7.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 3 2\coqdoceol
+\coqdocindent{6.00em}
+\coqdockw{end}))\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 3 \coqdocvar{j}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e'\_22} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\end{coqdoccode}
+ 上で定義した \verb|e_22| に基づいて定義する  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} (\coqdocvar{e'\_12} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{8.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{9.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{9.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 1 \coqdocvar{j}\coqdoceol
+\coqdocindent{9.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} (\coqdocvar{e\_22} \coqdocvar{b} 1 \coqdocvar{j})\coqdoceol
+\coqdocindent{8.50em}
+\coqdockw{end}) 1 \coqdocvar{j})\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} (\coqdocvar{e'\_12} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{8.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{9.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} (\coqdocvar{e\_22} \coqdocvar{b} 1 \coqdocvar{j})\coqdoceol
+\coqdocindent{9.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} (\coqdocvar{S} \coqdocvar{i}) \coqdocvar{j}\coqdoceol
+\coqdocindent{8.50em}
+\coqdockw{end}) 1 \coqdocvar{j})\coqdoceol
+\coqdocnoindent
+\coqdockw{end}\coqdoceol
+\coqdocnoindent
+).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$P_{(n+1)m}$ の境界条件を, $P_{nm}$ と $P_{1m}$ に分割し, 前者の境界条件を出す関数.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{bSnm\_to\_bnm} (\coqdocvar{m} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{boundary}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{boundary}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{m} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{i} \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{i} \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 0 1\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{b} 0 2\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 0 \coqdocvar{j})\coqdoceol
+\coqdocindent{9.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} (\coqdocvar{S} \coqdocvar{i}) \coqdocvar{j}\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$P_{(n+1)m}$ の境界条件を, $P_{nm}$ と $P_{1m}$ に分割し, 後者の境界条件を出す関数.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{bSnm\_to\_b1m} (\coqdocvar{m} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{boundary}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{boundary}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{m} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{i} \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{i} \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 1 \coqdocvar{j}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{b} 0 1\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{b} 0 2\coqdoceol
+\coqdocindent{10.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{C\_other2} (\coqdocvar{b} 0 \coqdocvar{j})\coqdoceol
+\coqdocindent{9.00em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+\verb|bSnm_to_b1m| で出てくる $P_{1m}$ を Tiling する関数.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e\_1m} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\end{coqdoccode}
+ 横エッジはそのまま, \verb|e 0 j = b 0 j|, \verb|e 1 j = b 2 j| とすればよい  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 2 \coqdocvar{j}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{e'\_1m} (\coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{edge}.\coqdoceol
+\end{coqdoccode}
+ 縦エッジは, \verb|b 1 0 = e' 1 0 <> e' 1 1 <> e' 1 2 = ... = e' 1 m = b 1 (S m)| にする  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocnoindent
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{1.00em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with}\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{b} 1 0\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 (\coqdocvar{S} \coqdocvar{m}))\coqdoceol
+\coqdocindent{5.50em}
+\ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdocvar{b} 1 (\coqdocvar{S} \coqdocvar{m})\coqdoceol
+\coqdocindent{4.50em}
+\coqdockw{end}\coqdoceol
+\coqdocnoindent
+\coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$P_{n2}$ を Tiling する関数.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_n2} (\coqdocvar{n} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} \coqdocvar{b} : \coqdocvar{boundary} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e\_12} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{e\_22} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'} \ensuremath{\Rightarrow} \coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} (\coqdocvar{bSnm\_to\_b1m} 2 \coqdocvar{b}) 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e\_n2} \coqdocvar{n'} (\coqdocvar{bSnm\_to\_bnm} 2 \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e'\_n2} (\coqdocvar{n} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} \coqdocvar{b} : \coqdocvar{boundary} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_12} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{e'\_22} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'} \ensuremath{\Rightarrow} \coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} 2 (\coqdocvar{bSnm\_to\_b1m} 2 \coqdocvar{b}) 1 \coqdocvar{j}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e'\_n2} \coqdocvar{n'} (\coqdocvar{bSnm\_to\_bnm} 2 \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$P_{nm}$ での境界条件および Tiling 関数を $P_{mn}$ のものに置き換える関数. やっていることはただの引数順序の入れ替え. 横エッジ \verb|e| と縦エッジ \verb|e'| も入れ替える.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{bnm\_to\_bmn} (\coqdocvar{b} : \coqdocvar{boundary}) : \coqdocvar{boundary}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{i} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{b} \coqdocvar{j} \coqdocvar{i}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{enm\_to\_emn} (\coqdocvar{e} : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{i} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{e} (\coqdocvar{bnm\_to\_bmn} \coqdocvar{b}) \coqdocvar{j} \coqdocvar{i}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Defined}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+3 色以上, 2 $\times$ 2 以上のときに, $P_{nm}$ を Tiling する関数.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_nm} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} \coqdocvar{b} : \coqdocvar{boundary} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e\_1m} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{enm\_to\_emn} (\coqdockw{fun} \coqdocvar{b'} \ensuremath{\Rightarrow} \coqdocvar{e'\_n2} \coqdocvar{m} \coqdocvar{b'}) \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'} \ensuremath{\Rightarrow} \coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m} \coqdocvar{b}) 0 \coqdocvar{j}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e\_nm} \coqdocvar{n'} \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e'\_nm} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}) : \coqdocvar{boundary} \ensuremath{\rightarrow} \coqdocvar{edge} :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{fun} \coqdocvar{b} : \coqdocvar{boundary} \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} \coqdocvar{m} \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 2 \ensuremath{\Rightarrow} \coqdocvar{enm\_to\_emn} (\coqdockw{fun} \coqdocvar{b'} \ensuremath{\Rightarrow} \coqdocvar{e\_n2} \coqdocvar{m} \coqdocvar{b'}) \coqdocvar{b}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{n'} \ensuremath{\Rightarrow} \coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{match} \coqdocvar{i} \coqdockw{with}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} 0\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} \coqdocvar{m} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m} \coqdocvar{b}) 1 \coqdocvar{j}\coqdoceol
+\coqdocindent{7.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e'\_nm} \coqdocvar{n'} \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j}\coqdoceol
+\coqdocindent{6.50em}
+\coqdockw{end}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+Tiling 関数を \verb|e_nm|, \verb|e'_nm| に固定したものを定義.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{tiling\_nm} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{tiling} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m}) (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+\section{Examples}
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{eq\_to\_bin} 8 8).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = 0
+     : nat
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{eq\_to\_bin} 4 7).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = 1
+     : nat
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{C\_other2} 1).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = 0
+     : nat
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{C\_other3} 0 1).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = 2
+     : nat
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{C\_other3} 2 0).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = 1
+     : nat
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 1 2 (\coqdockw{fun} \coqdocvar{\_} \coqdocvar{\_} \ensuremath{\Rightarrow} 0) \coqdocvar{e\_12} \coqdocvar{e'\_12}).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 0 :: ^ :: 0 :: ^ :: nil)
+    :: (0 :: # :: 1 :: # :: 0 :: nil)
+    :: (^ :: 0 :: ^ :: 0 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+\verb|#| がタイルを表す. つまり \verb|#| の上下左右が Brick Corner Wang Tiling の条件を満たせばよい.
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 1 2 (\coqdockw{fun} \coqdocvar{\_} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end}) \coqdocvar{e\_12} \coqdocvar{e'\_12}).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (1 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 2 2 (\coqdockw{fun} \coqdocvar{\_} \coqdocvar{\_} \ensuremath{\Rightarrow} 0) \coqdocvar{e\_22} \coqdocvar{e'\_22}).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 0 :: ^ :: 0 :: ^ :: nil)
+    :: (0 :: # :: 0 :: # :: 0 :: nil)
+    :: (^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 0 :: # :: 0 :: nil)
+    :: (^ :: 0 :: ^ :: 0 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 2 2 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 2 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end}) \coqdocvar{e\_22} \coqdocvar{e'\_22}).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 2 :: ^ :: nil)
+    :: (0 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 1 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 2 2 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 1 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end}) \coqdocvar{e\_22} \coqdocvar{e'\_22}).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 2 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (1 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 1 4 (\coqdocvar{bSnm\_to\_b1m} 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 2 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})) \coqdocvar{e\_1m} (\coqdocvar{e'\_1m} 4)).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: nil)
+    :: (0 :: # :: 2 :: # :: 1 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 2 :: ^ :: 0 :: ^ :: 0 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 1 4 (\coqdocvar{bSnm\_to\_b1m} 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 1 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})) \coqdocvar{e\_1m} (\coqdocvar{e'\_1m} 4)).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 1 :: # :: 0 :: # :: 0 :: # :: 0 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: 0 :: ^ :: 0 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 3 2 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 2 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end}) (\coqdocvar{e\_n2} 3) (\coqdocvar{e'\_n2} 3)).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 2 :: ^ :: nil)
+    :: (0 :: # :: 2 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 2 :: ^ :: nil)
+    :: (0 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 1 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 4 2 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 1 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end}) (\coqdocvar{e\_n2} 4) (\coqdocvar{e'\_n2} 4)).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (0 :: # :: 2 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (1 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil)
+    :: (1 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 0 :: ^ :: 0 :: ^ :: nil)
+    :: (1 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 2 4 (\coqdocvar{bnm\_to\_bmn} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 2 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})) (\coqdocvar{enm\_to\_emn} (\coqdocvar{e'\_n2} 4)) (\coqdocvar{enm\_to\_emn} (\coqdocvar{e\_n2} 4))).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 0 :: ^ :: 0 :: ^ :: 0 :: ^ :: 0 :: ^ :: nil)
+    :: (2 :: # :: 2 :: # :: 2 :: # :: 2 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 2 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
+    :: (2 :: # :: 2 :: # :: 2 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling} 2 4 (\coqdocvar{bnm\_to\_bmn} (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 1 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})) (\coqdocvar{enm\_to\_emn} (\coqdocvar{e'\_n2} 4)) (\coqdocvar{enm\_to\_emn} (\coqdocvar{e\_n2} 4))).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 0 :: ^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (2 :: # :: 2 :: # :: 2 :: # :: 0 :: # :: 2 :: nil)
+    :: (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (1 :: # :: 1 :: # :: 1 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling\_nm} 4 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} 5 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 1 \ensuremath{\Rightarrow} 3 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 4 \coqdockw{end} \coqdockw{end})).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: nil)
+    :: (4 :: # :: 0 :: # :: 4 :: # :: 4 :: # :: 4 :: nil)
+    :: (^ :: 2 :: ^ :: 2 :: ^ :: 0 :: ^ :: 0 :: ^ :: nil)
+    :: (4 :: # :: 0 :: # :: 4 :: # :: 4 :: # :: 4 :: nil)
+    :: (^ :: 2 :: ^ :: 2 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (5 :: # :: 5 :: # :: 5 :: # :: 5 :: # :: 1 :: nil)
+    :: (^ :: 0 :: ^ :: 0 :: ^ :: 0 :: ^ :: 1 :: ^ :: nil)
+    :: (4 :: # :: 4 :: # :: 4 :: # :: 4 :: # :: 4 :: nil)
+    :: (^ :: 3 :: ^ :: 4 :: ^ :: 4 :: ^ :: 4 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling\_nm} 4 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 3 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 4 \coqdockw{end} \ensuremath{|} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 5 \coqdockw{end} \coqdockw{end})).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
+    :: (4 :: # :: 0 :: # :: 5 :: # :: 5 :: # :: 5 :: nil)
+    :: (^ :: 2 :: ^ :: 0 :: ^ :: 0 :: ^ :: 1 :: ^ :: nil)
+    :: (3 :: # :: 0 :: # :: 5 :: # :: 5 :: # :: 5 :: nil)
+    :: (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
+    :: (3 :: # :: 3 :: # :: 3 :: # :: 5 :: # :: 5 :: nil)
+    :: (^ :: 0 :: ^ :: 1 :: ^ :: 1 :: ^ :: 5 :: ^ :: nil)
+    :: (4 :: # :: 4 :: # :: 4 :: # :: 0 :: # :: 5 :: nil)
+    :: (^ :: 2 :: ^ :: 5 :: ^ :: 1 :: ^ :: 5 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling\_nm} 4 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 3 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 2 \coqdockw{end} \ensuremath{|} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})).\coqdoceol
+\end{coqdoccode}
+ 
+\begin{verbatim}
+     = (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
+    :: (2 :: # :: 0 :: # :: 1 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 0 :: ^ :: 0 :: ^ :: 1 :: ^ :: nil)
+    :: (3 :: # :: 0 :: # :: 1 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
+    :: (3 :: # :: 3 :: # :: 3 :: # :: 1 :: # :: 1 :: nil)
+    :: (^ :: 0 :: ^ :: 2 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil)
+    :: (2 :: # :: 2 :: # :: 2 :: # :: 0 :: # :: 1 :: nil)
+    :: (^ :: 2 :: ^ :: 1 :: ^ :: 1 :: ^ :: 1 :: ^ :: nil) :: nil
+     : list (list nat)
+\end{verbatim}
+  
+
+ 
+\section{Main theorems}
+WangTiling.v から, ``Tiling 可能'' の定義をインポート. 以下の 3 つを全て同時に満たせば Tiling できていることになる.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{Boundary\_i} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{e'} : \coqdocvar{edge}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{\ensuremath{\forall}} \coqdocvar{i} : \coqdocvar{nat}, \coqdocvar{e'} \coqdocvar{i} 0 = \coqdocvar{b} \coqdocvar{i} 0 \ensuremath{\land} \coqdocvar{e'} \coqdocvar{i} \coqdocvar{m} = \coqdocvar{b} \coqdocvar{i} (\coqdocvar{S} \coqdocvar{m}) \ensuremath{\lor} \coqdocvar{i} = 0 \ensuremath{\lor} \coqdocvar{n} < \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{Boundary\_j} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{e} : \coqdocvar{edge}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{\ensuremath{\forall}} \coqdocvar{j} : \coqdocvar{nat}, \coqdocvar{e} 0 \coqdocvar{j} = \coqdocvar{b} 0 \coqdocvar{j} \ensuremath{\land} \coqdocvar{e} \coqdocvar{n} \coqdocvar{j} = \coqdocvar{b} (\coqdocvar{S} \coqdocvar{n}) \coqdocvar{j} \ensuremath{\lor} \coqdocvar{j} = 0 \ensuremath{\lor} \coqdocvar{m} < \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{Brick} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{e} \coqdocvar{e'} : \coqdocvar{edge}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{\ensuremath{\forall}} \coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat},\coqdoceol
+\coqdocindent{0.50em}
+(\coqdocvar{e} \coqdocvar{i} (\coqdocvar{S} \coqdocvar{j}) = \coqdocvar{e} (\coqdocvar{S} \coqdocvar{i}) (\coqdocvar{S} \coqdocvar{j}) \ensuremath{\land} \coqdocvar{e'} (\coqdocvar{S} \coqdocvar{i}) \coqdocvar{j} \ensuremath{\not=} \coqdocvar{e'} (\coqdocvar{S} \coqdocvar{i}) (\coqdocvar{S} \coqdocvar{j})) \ensuremath{\lor}\coqdoceol
+\coqdocindent{0.50em}
+(\coqdocvar{e} \coqdocvar{i} (\coqdocvar{S} \coqdocvar{j}) \ensuremath{\not=} \coqdocvar{e} (\coqdocvar{S} \coqdocvar{i}) (\coqdocvar{S} \coqdocvar{j}) \ensuremath{\land} \coqdocvar{e'} (\coqdocvar{S} \coqdocvar{i}) \coqdocvar{j} = \coqdocvar{e'} (\coqdocvar{S} \coqdocvar{i}) (\coqdocvar{S} \coqdocvar{j})) \ensuremath{\lor}\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{n} \ensuremath{\le} \coqdocvar{i} \ensuremath{\lor} \coqdocvar{m} \ensuremath{\le} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{Tileable} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{e} \coqdocvar{e'} : \coqdocvar{edge}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{Boundary\_i} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} \coqdocvar{e'} \ensuremath{\land} \coqdocvar{Boundary\_j} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} \coqdocvar{e} \ensuremath{\land} \coqdocvar{Brick} \coqdocvar{n} \coqdocvar{m} \coqdocvar{e} \coqdocvar{e'}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{Tileable\_nm} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{Boundary\_i} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) \ensuremath{\land} \coqdocvar{Boundary\_j} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) \ensuremath{\land}\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{Brick} \coqdocvar{n} \coqdocvar{m} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$P_{22}$ は 3 色以上で Tileable という補題.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{P22\_Tileable\_nm} : \coqdockw{\ensuremath{\forall}} \coqdocvar{b} : \coqdocvar{boundary}, \coqdocvar{Tileable\_nm} 2 2 \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{compute}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_nm}/\coqdocvar{e\_nm}/\coqdocvar{enm\_to\_emn}/\coqdocvar{bnm\_to\_bmn}/\coqdocvar{e'\_n2}/\coqdocvar{e\_n2}/\coqdocvar{e'\_22}/\coqdocvar{e\_22}/\coqdocvar{e'\_12}/\coqdocvar{eq\_to\_if}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{simpl}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{i} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{simpl}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{simpl}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{C\_other2} (\coqdocvar{b} 2 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{False\_ind}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} (\coqdocvar{C\_other3\_neq} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) \ensuremath{\Rightarrow} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{H} \coqdocvar{Heqn0}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{C\_other2} (\coqdocvar{b} 2 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{C\_other2} (\coqdocvar{b} 2 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{C\_other2} (\coqdocvar{b} 2 3)) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} (\coqdocvar{C\_other3\_neq} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) \ensuremath{\Rightarrow} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{False\_ind}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{H} \coqdocvar{Heqn0}).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} (\coqdocvar{C\_other3\_neq} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) \ensuremath{\Rightarrow} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1} \coqdoctac{in} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{False\_ind}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{apply} \coqdocvar{H0}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{C\_other2} (\coqdocvar{b} 2 0)) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 3) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 2) (\coqdocvar{b} 3 2)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{C\_other3} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} (\coqdocvar{C\_other3\_neq} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)) \ensuremath{\Rightarrow} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn0} \coqdoctac{in} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{False\_ind}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{apply} \coqdocvar{H0}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 0 1) (\coqdocvar{b} 3 1)).\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} -\coqdocvar{Heqn0}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 2 0) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{remember} (\coqdocvar{eq\_to\_bin} (\coqdocvar{C\_other2} (\coqdocvar{b} 2 0)) (\coqdocvar{b} 2 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{eq\_to\_bin\_iff} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} (\coqdocvar{eq\_to\_bin} (\coqdocvar{b} 1 0) (\coqdocvar{b} 1 3)).\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{eq\_to\_bin\_nn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H} \coqdocvar{eq\_to\_bin\_nn} \coqdoctac{in} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{Heqn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$m \geq 2$ で $P_{2m}$ が Tileable なら, $P_{2(m+1)}$ も Tileable という補題.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{Tileable\_nm\_ind\_2m} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} (\coqdockw{\ensuremath{\forall}} \coqdocvar{b'} : \coqdocvar{boundary}, \coqdocvar{Tileable\_nm} 2 \coqdocvar{m} \coqdocvar{b'}) \ensuremath{\rightarrow} \coqdocvar{Tileable\_nm} 2 (\coqdocvar{S} \coqdocvar{m}) \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{m} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{Tileable\_nm}/\coqdocvar{e'\_nm}/\coqdocvar{e\_nm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdockw{fun} \coqdocvar{b'} : \coqdocvar{boundary} \ensuremath{\Rightarrow} \coqdocvar{e\_n2} \coqdocvar{m}.+1 \coqdocvar{b'}) \coqdockw{with} (\coqdockw{fun} \coqdocvar{b'} : \coqdocvar{boundary} \ensuremath{\Rightarrow} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} (\coqdocvar{bSnm\_to\_b1m} 2 \coqdocvar{b'}) 0 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e\_n2} \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} 2 \coqdocvar{b'}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end})).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e\_n2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdockw{fun} \coqdocvar{b'} : \coqdocvar{boundary} \ensuremath{\Rightarrow} \coqdocvar{e'\_n2} \coqdocvar{m}.+1 \coqdocvar{b'}) \coqdockw{with} (\coqdockw{fun} \coqdocvar{b'} : \coqdocvar{boundary} \ensuremath{\Rightarrow} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} 2 (\coqdocvar{bSnm\_to\_b1m} 2 \coqdocvar{b'}) 1 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e'\_n2} \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} 2 \coqdocvar{b'}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end})).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_n2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm} \coqdocvar{IHm0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : (\coqdocvar{H0} (\coqdocvar{bnm\_to\_bmn} (\coqdocvar{bSnm\_to\_bnm} 2 (\coqdocvar{bnm\_to\_bmn} \coqdocvar{b})))).\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{Tileable\_nm}/\coqdocvar{Boundary\_i}/\coqdocvar{Boundary\_j}/\coqdocvar{Brick}/\coqdocvar{e'\_nm}/\coqdocvar{e\_nm}/\coqdocvar{enm\_to\_emn}/\coqdocvar{bnm\_to\_bmn}/\coqdocvar{bSnm\_to\_b1m}/\coqdocvar{bSnm\_to\_bnm}/\coqdocvar{e'\_1m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} \ensuremath{\Rightarrow} \coqdocvar{H1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} \ensuremath{\Rightarrow} \coqdocvar{H2} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{H2} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} (\coqdocvar{H1} 1) \ensuremath{\Rightarrow} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \coqdocvar{H2}; \coqdoctac{discriminate}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} (\coqdocvar{H1} 2) \ensuremath{\Rightarrow} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \coqdocvar{H2}; \coqdoctac{discriminate}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{repeat} \coqdoctac{right}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{H1} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_1m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} (\coqdocvar{H2} (\coqdocvar{S} \coqdocvar{j})) \ensuremath{\Rightarrow} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \coqdocvar{H3} \ensuremath{\Rightarrow} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{right}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : \coqdocvar{H2} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H2} \coqdocvar{H3} \coqdocvar{i} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e\_22}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e\_22}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_22}/\coqdocvar{e\_22}/\coqdocvar{e'\_12}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$m \geq 2$ なら, $P_{2m}$ は 3 色以上で Tileable という補題.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{P2m\_Tileable\_nm} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{m} : \coqdocvar{nat}), 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} \coqdocvar{Tileable\_nm} 2 \coqdocvar{m} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{P22\_Tileable\_nm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{Tileable\_nm\_ind\_2m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b'}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{IHm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$n,m \geq 2$ で $P_{nm}$ が Tileable なら, $P_{(n+1)m}$ も Tileable という補題.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{Tileable\_nm\_ind\_nm} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{n} \ensuremath{\rightarrow} 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} (\coqdockw{\ensuremath{\forall}} \coqdocvar{b'} : \coqdocvar{boundary}, \coqdocvar{Tileable\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b'}) \ensuremath{\rightarrow} \coqdocvar{Tileable\_nm} (\coqdocvar{S} \coqdocvar{n}) \coqdocvar{m} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{n} \coqdocvar{m} \coqdocvar{H} \coqdocvar{H0} \coqdocvar{H1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHn} \coqdocvar{IHn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : (\coqdocvar{H1} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b})).\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{Tileable\_nm}/\coqdocvar{Boundary\_i}/\coqdocvar{Boundary\_j}/\coqdocvar{Brick}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} \ensuremath{\Rightarrow} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} \ensuremath{\Rightarrow} \coqdocvar{H3} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{H3} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : (\coqdocvar{H2} \coqdocvar{i}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdocvar{e'\_nm} \coqdocvar{n}.+3 \coqdocvar{m} \coqdocvar{b}) \coqdockw{with} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} \coqdocvar{m} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m} \coqdocvar{b}) 1 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e'\_nm} \coqdocvar{n}.+2 \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} /\coqdocvar{e'\_nm}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm} \coqdocvar{IHm0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \ensuremath{\Rightarrow} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{bSnm\_to\_bnm} \coqdoctac{in} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_1m}/\coqdocvar{bSnm\_to\_b1m}/\coqdocvar{bSnm\_to\_bnm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H3}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \coqdocvar{H3} \ensuremath{\Rightarrow} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{e'\_1m}/\coqdocvar{bSnm\_to\_b1m}/\coqdocvar{bSnm\_to\_bnm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{right}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{H2} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : (\coqdocvar{H3} \coqdocvar{j}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{right}; \coqdoctac{left}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdocvar{e\_nm} \coqdocvar{n}.+3 \coqdocvar{m}.+2 \coqdocvar{b}) \coqdockw{with} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m}.+2 \coqdocvar{b}) 0 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e\_nm} \coqdocvar{n}.+2 \coqdocvar{m}.+2 (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m}.+2 \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} /\coqdocvar{e\_nm}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{bSnm\_to\_bnm}/\coqdocvar{bSnm\_to\_b1m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm} \coqdocvar{IHm0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \ensuremath{\Rightarrow} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{H2}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdocvar{e'\_nm} \coqdocvar{n}.+3 \coqdocvar{m} \coqdocvar{b}) \coqdockw{with} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} 1 \ensuremath{\Rightarrow} \coqdocvar{e'\_1m} \coqdocvar{m} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m} \coqdocvar{b}) 1 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e'\_nm} \coqdocvar{n}.+2 \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} /\coqdocvar{e'\_nm}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{replace} (\coqdocvar{e\_nm} \coqdocvar{n}.+3 \coqdocvar{m} \coqdocvar{b}) \coqdockw{with} (\coqdockw{fun} (\coqdocvar{i} \coqdocvar{j} : \coqdocvar{nat}) \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} (\coqdocvar{bSnm\_to\_b1m} \coqdocvar{m} \coqdocvar{b}) 0 \coqdocvar{j} \ensuremath{|} \coqdocvar{S} \coqdocvar{i'} \ensuremath{\Rightarrow} \coqdocvar{e\_nm} \coqdocvar{n}.+2 \coqdocvar{m} (\coqdocvar{bSnm\_to\_bnm} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{i'} \coqdocvar{j} \coqdockw{end}).\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [\coqdoctac{rewrite} /\coqdocvar{e\_nm}].\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{i} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{i}.\coqdoceol
+\coqdocnoindent
+\coqdocvar{Focus} 2.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H4}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} (\coqdocvar{H3} \coqdocvar{j}.+1) \ensuremath{\Rightarrow} \coqdocvar{H5}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{elim} \coqdocvar{H5} \ensuremath{\Rightarrow} \coqdocvar{H6} \coqdocvar{H7}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} \coqdocvar{H6}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{rewrite} /\coqdocvar{bSnm\_to\_b1m}/\coqdocvar{bSnm\_to\_bnm}/\coqdocvar{enm\_to\_emn}/\coqdocvar{bnm\_to\_bmn}/\coqdocvar{e'\_1m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm} \coqdocvar{IHm0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{j}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{not\_eq\_sym}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other3\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{right}; \coqdoctac{left}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{split}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{C\_other2\_neq}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{by} [].\coqdoceol
+\coqdocnoindent
+\coqdoctac{case} \coqdocvar{H5} \ensuremath{\Rightarrow} \coqdocvar{H6}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H6}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{repeat} \coqdoctac{right}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H6}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+$n,m \geq 2$ なら, $P_{nm}$ は 3 色以上で Tileable という補題.
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Lemma} \coqdocvar{Pnm\_Tileable\_nm} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{n} \ensuremath{\rightarrow} 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} \coqdocvar{Tileable\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{n} \coqdocvar{m} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHn} \coqdocvar{IHn0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{m}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{discriminate} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{clear} \coqdocvar{IHm} \coqdocvar{IHm0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} : \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{induction} \coqdocvar{n}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{P2m\_Tileable\_nm} \coqdocvar{\_} \coqdocvar{\_} \coqdocvar{H0}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{Tileable\_nm\_ind\_nm}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{IHn}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{H}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{Pnm\_Tileable} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{n} \ensuremath{\rightarrow} 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} \coqdoctac{\ensuremath{\exists}} (\coqdocvar{e} \coqdocvar{e'} : \coqdocvar{edge}), \coqdocvar{Tileable} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} \coqdocvar{e} \coqdocvar{e'}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{n} \coqdocvar{m} \coqdocvar{H} \coqdocvar{H0}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{\ensuremath{\exists}} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{\ensuremath{\exists}} (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{Pnm\_Tileable\_nm} \coqdocvar{\_} \coqdocvar{\_} \coqdocvar{\_} \coqdocvar{H} \coqdocvar{H0}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{e\_Tileable} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{n} \ensuremath{\rightarrow} 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} \coqdocvar{Tileable} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{Pnm\_Tileable\_nm}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Theorem} \coqdocvar{Tileable\_exists} : \coqdockw{\ensuremath{\forall}} (\coqdocvar{b} : \coqdocvar{boundary})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}),\coqdoceol
+\coqdocindent{0.50em}
+2 \ensuremath{\le} \coqdocvar{n} \ensuremath{\rightarrow} 2 \ensuremath{\le} \coqdocvar{m} \ensuremath{\rightarrow} \coqdoctac{\ensuremath{\exists}} (\coqdocvar{e} \coqdocvar{e'} : \coqdocvar{edge}), \coqdocvar{Tileable} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b} \coqdocvar{e} \coqdocvar{e'}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{move} \ensuremath{\Rightarrow} \coqdocvar{b} \coqdocvar{n} \coqdocvar{m} \coqdocvar{H0} \coqdocvar{H1}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{\ensuremath{\exists}} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{\ensuremath{\exists}} (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}).\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} (\coqdocvar{e\_Tileable} \coqdocvar{b} \coqdocvar{n} \coqdocvar{m} \coqdocvar{H0} \coqdocvar{H1}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+\section{Export to Mathematica}
+mathematica へのエクスポートのための設定
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{null\_list} \{\coqdocvar{A} : \coqdockw{Type}\} (\coqdocvar{l} \coqdocvar{m} : \coqdocvar{list} \coqdocvar{A}) : \coqdockw{Prop}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Proof}.\coqdoceol
+\coqdocnoindent
+\coqdoctac{apply} \coqdocvar{True}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Qed}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "\{ x \}" := (\coqdocvar{cons} \coqdocvar{x} \coqdocvar{nil}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "\{ x , .. , y \}" := (\coqdocvar{cons} \coqdocvar{x} .. (\coqdocvar{cons} \coqdocvar{y} \coqdocvar{nil}) ..).\coqdoceol
+\coqdocnoindent
+\coqdockw{Notation} "Tiling[ l , m ]" := (\coqdocvar{null\_list} \coqdocvar{l} \coqdocvar{m}).\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_list\_n} (\coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat})(\coqdocvar{n} : \coqdocvar{nat}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i} \ensuremath{\Rightarrow} (\coqdocvar{e\_list\_n} \coqdocvar{f} \coqdocvar{i}) ++ \{\coqdocvar{f} (\coqdocvar{S} \coqdocvar{i})\}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e\_list} (\coqdocvar{e} : \coqdocvar{edge})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \{\coqdocvar{e\_list\_n} (\coqdocvar{e} 0) \coqdocvar{m}\}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i} \ensuremath{\Rightarrow} (\coqdocvar{e\_list} \coqdocvar{e} \coqdocvar{i} \coqdocvar{m}) ++ \{\coqdocvar{e\_list\_n} (\coqdocvar{e} (\coqdocvar{S} \coqdocvar{i})) \coqdocvar{m}\}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e'\_list\_n} (\coqdocvar{f} : \coqdocvar{nat} \ensuremath{\rightarrow} \coqdocvar{nat})(\coqdocvar{n} : \coqdocvar{nat}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \{\coqdocvar{f} 0\}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i} \ensuremath{\Rightarrow} (\coqdocvar{e'\_list\_n} \coqdocvar{f} \coqdocvar{i}) ++ \{\coqdocvar{f} (\coqdocvar{S} \coqdocvar{i})\}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Fixpoint} \coqdocvar{e'\_list} (\coqdocvar{e} : \coqdocvar{edge})(\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{match} \coqdocvar{n} \coqdockw{with}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} 0 \ensuremath{\Rightarrow} \coqdocvar{nil}\coqdoceol
+\coqdocindent{1.50em}
+\ensuremath{|} \coqdocvar{S} \coqdocvar{i} \ensuremath{\Rightarrow} (\coqdocvar{e'\_list} \coqdocvar{e} \coqdocvar{i} \coqdocvar{m}) ++ \{\coqdocvar{e'\_list\_n} (\coqdocvar{e} (\coqdocvar{S} \coqdocvar{i})) \coqdocvar{m}\}\coqdoceol
+\coqdocindent{0.50em}
+\coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Definition} \coqdocvar{tiling\_nm2} (\coqdocvar{n} \coqdocvar{m} : \coqdocvar{nat})(\coqdocvar{b} : \coqdocvar{boundary}) :=\coqdoceol
+\coqdocindent{0.50em}
+\coqdocvar{Tiling}[\coqdocvar{e\_list} (\coqdocvar{e\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{n} \coqdocvar{m}, \coqdocvar{e'\_list} (\coqdocvar{e'\_nm} \coqdocvar{n} \coqdocvar{m} \coqdocvar{b}) \coqdocvar{n} \coqdocvar{m}].\coqdoceol
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Compute} (\coqdocvar{tiling\_nm2} 4 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 3 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 4 \coqdockw{end} \ensuremath{|} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 5 \coqdockw{end} \coqdockw{end})).\coqdoceol
+\coqdocemptyline
+\end{coqdoccode}
+
+どうしても \verb|=| と \verb|: Prop| が邪魔という人向け
+ \begin{coqdoccode}
+\coqdocemptyline
+\coqdocnoindent
+\coqdockw{Ltac} \coqdocvar{print} := \coqdoctac{compute}; \coqdockw{match} \coqdockw{goal} \coqdockw{with} \ensuremath{\vdash} ?\coqdocvar{x} \ensuremath{\Rightarrow} \coqdoctac{idtac} \coqdocvar{x} \coqdockw{end}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Goal} (\coqdocvar{tiling\_nm2} 4 4 (\coqdockw{fun} \coqdocvar{i} \coqdocvar{j} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{j} \coqdockw{with} 0 \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 3 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 2 \coqdockw{end} \ensuremath{|} 1 \ensuremath{\Rightarrow} 2 \ensuremath{|} 3 \ensuremath{\Rightarrow} 1 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} \coqdockw{match} \coqdocvar{i} \coqdockw{with} 0 \ensuremath{\Rightarrow} 0 \ensuremath{|} \coqdocvar{\_} \ensuremath{\Rightarrow} 1 \coqdockw{end} \coqdockw{end})).\coqdoceol
+\coqdocnoindent
+\coqdocvar{print}.\coqdoceol
+\coqdocnoindent
+\coqdockw{Abort}.\coqdoceol
+\end{coqdoccode}
+\end{document}

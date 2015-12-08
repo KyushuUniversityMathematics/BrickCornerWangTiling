@@ -1388,3 +1388,4 @@ Compute (tiling_nm2 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | 
 Ltac print := compute; match goal with |- ?x => idtac x end.
 Goal (tiling_nm2 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ => 2 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 1 end end)).
 print.
+Abort.

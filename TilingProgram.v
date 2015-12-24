@@ -1294,8 +1294,8 @@ Qed.
 $n,m \geq 2$ なら, $P_{nm}$ は 3 色以上で Tileable という補題.
 % **)
 
-Lemma Pnm_Tileable_nm : forall (b : boundary)(n m : nat),
- 2 <= n -> 2 <= m -> Tileable_nm n m b.
+Theorem e_Tileable : forall (b : boundary)(n m : nat),
+ 2 <= n -> 2 <= m -> Tileable n m b (e_nm n m b) (e'_nm n m b).
 Proof.
 move => b n m H H0.
 induction n.
@@ -1318,21 +1318,6 @@ apply H.
 apply H0.
 apply IHn.
 apply H.
-Qed.
-
-Theorem Pnm_Tileable : forall (b : boundary)(n m : nat),
- 2 <= n -> 2 <= m -> exists (e e' : edge), Tileable n m b e e'.
-Proof.
-move => b n m H H0.
-exists (e_nm n m b).
-exists (e'_nm n m b).
-apply (Pnm_Tileable_nm _ _ _ H H0).
-Qed.
-
-Theorem e_Tileable : forall (b : boundary)(n m : nat),
- 2 <= n -> 2 <= m -> Tileable n m b (e_nm n m b) (e'_nm n m b).
-Proof.
-apply Pnm_Tileable_nm.
 Qed.
 
 Theorem Tileable_exists : forall (b : boundary)(n m : nat),

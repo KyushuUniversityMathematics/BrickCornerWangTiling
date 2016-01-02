@@ -1320,7 +1320,7 @@ apply IHn.
 apply H.
 Qed.
 
-Theorem Tileable_exists : forall (b : boundary)(n m : nat),
+Theorem Tileable_exist : forall (b : boundary)(n m : nat),
  2 <= n -> 2 <= m -> exists (e e' : edge), Tileable n m b e e'.
 Proof.
 move => b n m H0 H1.

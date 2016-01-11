@@ -662,7 +662,7 @@ Function counter_example_12 (i j:nat)
      end.
 
 Theorem e12_not_ValidTiling :
-  exists (b : boundary), forall (e e':edge), ValidTiling 1 2 b e e'.
+  exists (b : boundary), forall (e e':edge), ~ ValidTiling 1 2 b e e'.
 Proof.
   exists counter_example_12.
 Admitted.

@@ -2,7 +2,7 @@
 (* 2016/01/06 Yoshihiro Mizoguchi *)
 
 (** %
-\section{Preference0}
+\section{Preliminary (1)}
  % **)
 
 Require Import Ssreflect.ssreflect Ssreflect.eqtype Ssreflect.ssrbool Ssreflect.ssrnat Ssreflect.ssrfun.
@@ -30,6 +30,7 @@ by move: (H (erefl n)).
 move => H2.
 by right.
 Qed.
+
 Lemma neq_S: forall m:nat, m <> m.+1.
 Proof.
 elim.
@@ -115,26 +116,9 @@ apply (b0 (@x_eq_y_and_x_to_y _ _ H a0)).
 Qed.
 
 (** %
-\section{Preference1}
+\section{Preliminary (2)}
  % **)
 
-Definition color := nat.
-Definition vertical_index := nat.
-Definition horizontal_index := nat.
-Definition boundary := vertical_index -> horizontal_index -> color.
-Definition edge := vertical_index -> horizontal_index -> color.
-
-Definition Boundary_vertical (n m : nat) (b : boundary) (e' : edge) :=
- forall i : vertical_index, e' i 0 = b i 0 /\ e' i m = b i (S m) \/ i = 0 \/ n < i.
-Definition Boundary_horizontal (n m : nat) (b : boundary) (e : edge) :=
- forall j : horizontal_index, e 0 j = b 0 j /\ e n j = b (S n) j \/ j = 0 \/ m < j.
-Definition Brick (n m : nat) (e e' : edge) :=
- forall i : vertical_index, forall j : horizontal_index,
- (e i (S j) = e (S i) (S j) /\ e' (S i) j <> e' (S i) (S j)) \/
- (e i (S j) <> e (S i) (S j) /\ e' (S i) j = e' (S i) (S j)) \/
- n <= i \/ m <= j.
-Definition ValidTiling (n m : nat)(b : boundary)(e e' : edge) :=
- Boundary_vertical n m b e' /\ Boundary_horizontal n m b e /\ Brick n m e e'.
 
 (** %
 2 つの自然数が等しければ 0 を, 異なれば 1 を返す関数.
@@ -298,36 +282,23 @@ Qed.
 境界条件とエッジ関数は, ともに ``$x$ 座標と $y$ 座標から色を返す関数'' である.
  % **)
 
-(** %
-テスト用にプログラムを用いた Tiling を表示する関数も作ってみる.
- % **)
+Definition color := nat.
+Definition vertical_index := nat.
+Definition horizontal_index := nat.
+Definition boundary := vertical_index -> horizontal_index -> color.
+Definition edge := vertical_index -> horizontal_index -> color.
 
-Definition null {A : Type} (x : A): A.
-Proof.
-apply x.
-Qed.
-Notation "'^'" := (null 0).
-Notation "'#'" := (null 1).
-Open Scope list_scope.
-Fixpoint e_i (j : nat) : edge -> nat -> list nat :=
- fun (e : edge)(i : nat) =>
- match j with
-   | 0 => ^ :: nil
-   | S j' => (e_i j' e i) ++ ((e i (S j')) :: ^ :: nil)
- end.
-Fixpoint e'_i (j : nat) : edge -> nat -> list nat :=
- fun (e' : edge)(i : nat) =>
- match j with
-   | 0 => (e' i 0) :: nil
-   | S j' => (e'_i j' e' i) ++ (# :: (e' i (S j')) :: nil)
- end.
-Fixpoint e_e' (n m : nat)(e e' : edge) : list (list nat) :=
- match n with
-   | 0 => (e_i m e 0) :: nil
-   | S n' => (e_e' n' m e e') ++ ((e'_i m e' (S n')) :: (e_i m e (S n')) :: nil)
- end.
-Definition tiling (n m : nat)(b : boundary)(e_ e'_ : boundary -> edge) := e_e' n m (e_ b) (e'_ b).
-(** % 長方形サイズ $n \times m$, 境界条件 \verb|b|, Tiling 関数 \verb|e_|, \verb|e'_| から実際の Tiling を求める関数 % **)
+Definition Boundary_vertical (n m : nat) (b : boundary) (e' : edge) :=
+ forall i : vertical_index, e' i 0 = b i 0 /\ e' i m = b i (S m) \/ i = 0 \/ n < i.
+Definition Boundary_horizontal (n m : nat) (b : boundary) (e : edge) :=
+ forall j : horizontal_index, e 0 j = b 0 j /\ e n j = b (S n) j \/ j = 0 \/ m < j.
+Definition Brick (n m : nat) (e e' : edge) :=
+ forall i : vertical_index, forall j : horizontal_index,
+ (e i (S j) = e (S i) (S j) /\ e' (S i) j <> e' (S i) (S j)) \/
+ (e i (S j) <> e (S i) (S j) /\ e' (S i) j = e' (S i) (S j)) \/
+ n <= i \/ m <= j.
+Definition ValidTiling (n m : nat)(b : boundary)(e e' : edge) :=
+ Boundary_vertical n m b e' /\ Boundary_horizontal n m b e /\ Brick n m e e'.
 
 (** %
 まずは $P_{12}$ を Tiling する関数から. \verb|e| は横エッジ用, \verb|e'| は縦エッジ用.
@@ -388,7 +359,6 @@ match j with
 end).
 Defined.
 
-
 Lemma eq_to_if_1: forall (n p q: nat), (eq_to_if n n p q) = p.
 Proof.
 case.
@@ -404,6 +374,16 @@ move => n m p q H.
 rewrite /eq_to_if.
 by rewrite -(eq_to_bin_iff3 n m H).
 Qed.
+
+Ltac eq_simpl :=
+ repeat match goal with
+          | [ _ : _ |- _ ] => rewrite eq_to_bin_nn
+          | [ H : _ <> _ |- _ ] => rewrite -(eq_to_bin_iff3 _ _ H)
+        end.
+
+(** %
+\section{Lemmas and Theorems}
+% **)
 
 Lemma e12_Tileable_horizontal : forall (b : boundary),  Boundary_horizontal 1 2 b (e_12 b).
 Proof.
@@ -429,25 +409,9 @@ move => n.
 by right;right.
 Qed.
 
-(*
-(eq_to_bin X X) があれば,
-  rewrite (eq_to_bin_nn X) を
-(eq_to_bin X Y) があれば,
-  rewrite -(eq_to_bin_iff3 X Y Z) を
-行う Ltac を書きたい. X, Y, Z は Ltacの引数として自分で指定しても良い.
-
-「...があれば」の部分も自分で判断して, LtacA, LtacBと2つのLtacにしても良い.
-とにかく, rewrite... と打つ文字数を少なくしたい.
-
-*)
-Ltac eq_simpl :=
- repeat match goal with
-          | [ _ : _ |- _ ] => rewrite eq_to_bin_nn
-          | [ H : _ <> _ |- _ ] => rewrite -(eq_to_bin_iff3 _ _ H)
-        end.
-
 Lemma e12_Tileable_brick1 : forall (b : boundary),
- ((b 1 0) = (b 1 3)) -> (((b 0 1) = (b 2 1)) <-> ((b 0 2) = (b 2 2))) -> (Brick 1 2 (e_12 b) (e'_12 b)).
+  ((b 1 0) = (b 1 3)) -> (((b 0 1) = (b 2 1)) <-> ((b 0 2) = (b 2 2)))
+  -> (Brick 1 2 (e_12 b) (e'_12 b)).
 Proof.
 move => b H1 H2.
 rewrite /Brick.

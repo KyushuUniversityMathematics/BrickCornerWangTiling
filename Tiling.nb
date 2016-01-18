@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[     89537,       2117]
-NotebookOptionsPosition[     88333,       2072]
-NotebookOutlinePosition[     88697,       2088]
-CellTagsIndexPosition[     88654,       2085]
+NotebookDataLength[    129836,       3179]
+NotebookOptionsPosition[    128346,       3125]
+NotebookOutlinePosition[    128710,       3141]
+CellTagsIndexPosition[    128667,       3138]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -161,7 +161,7 @@ Cell[BoxData[
    3.655524718148314*^9, {3.655524762000622*^9, 3.655524769783811*^9}, {
    3.655524828095937*^9, 3.655524835207876*^9}, {3.655524887378008*^9, 
    3.6555248986701202`*^9}, 3.65552495222025*^9, 3.6558616579338713`*^9, 
-   3.661638739301612*^9}]
+   3.661638739301612*^9, 3.662075570252437*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -515,7 +515,8 @@ Cell[BoxData[
    3.655522738418442*^9, 3.655522741900881*^9}, {3.6555229915849*^9, 
    3.6555230441740427`*^9}, 3.655524144531637*^9, {3.6555241806642523`*^9, 
    3.655524187407744*^9}, 3.655524725214665*^9, 3.6555248517785597`*^9, 
-   3.655524955689851*^9, 3.655861658010754*^9, 3.661638739393675*^9}]
+   3.655524955689851*^9, 3.655861658010754*^9, 3.661638739393675*^9, 
+   3.662075570344027*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -701,7 +702,8 @@ Cell[BoxData[
    3.6555213010584106`*^9, 3.6555216207306004`*^9, 3.655522009814662*^9, 
    3.655522135405291*^9, 3.655522192455065*^9, 3.655522749263069*^9, 
    3.655522993540935*^9, 3.655524147126403*^9, 3.655524853901821*^9, 
-   3.6555249568759623`*^9, 3.655861658062483*^9, 3.661638739446694*^9}]
+   3.6555249568759623`*^9, 3.655861658062483*^9, 3.661638739446694*^9, 
+   3.6620755703921127`*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -878,7 +880,8 @@ Cell[BoxData[
   3.655520485352665*^9, 3.655521303232127*^9, 3.655522004226091*^9, 
   3.655522143439061*^9, 3.655522194063595*^9, 3.65552275161749*^9, 
   3.655522995150197*^9, 3.655524149765799*^9, 3.6555248568228197`*^9, 
-  3.655524958008912*^9, 3.655861658104838*^9, 3.6616387394906263`*^9}]
+  3.655524958008912*^9, 3.655861658104838*^9, 3.6616387394906263`*^9, 
+  3.66207557044559*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1035,7 +1038,8 @@ Cell[BoxData[
        NCache[
         Rational[1, 2], 0.5], 0., 1], 
       PolygonBox[{{8, -8}, {8, -6}, {7, -7}}]}}}}]], "Output",
- CellChangeTimes->{3.655862036786716*^9, 3.661638739540059*^9}]
+ CellChangeTimes->{3.655862036786716*^9, 3.661638739540059*^9, 
+  3.662075570488701*^9}]
 }, Open  ]],
 
 Cell[CellGroupData[{
@@ -1913,7 +1917,8 @@ Cell[BoxData[
      {RGBColor[0, 0.5, 1], 
       PolygonBox[{{20, -20}, {20, -18}, {19, -19}}]}}}}]], "Output",
  CellChangeTimes->{3.6558636375056953`*^9, 3.6558636679502373`*^9, 
-  3.655868587657148*^9, 3.655868649252033*^9, 3.661638739739101*^9}]
+  3.655868587657148*^9, 3.655868649252033*^9, 3.661638739739101*^9, 
+  3.662075570691674*^9}]
 }, Open  ]],
 
 Cell[BoxData[
@@ -2065,13 +2070,1061 @@ Cell[BoxData[
   3.6616397010818577`*^9, 3.661639812618705*^9, 3.661639847900708*^9, {
    3.661640024723456*^9, 3.661640033909781*^9}, 3.6616400795948143`*^9, 
    3.661640147612081*^9, 3.661640216081851*^9, {3.661640465935335*^9, 
-   3.661640472521089*^9}},
+   3.661640472521089*^9}, 3.662075570736402*^9},
  FontFamily->"Lucida Grande",
  FontColor->RGBColor[1., 0.9999542229343099, 1.]]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{"\:8ad6\:6587\:753b\:50cf\:7528", ",", "\:30ba", "\:30fc", 
+   RowBox[{"\:30e0200", "%", "\:3067\:30b9\:30af\:30ea"}], "\:30fc", 
+   "\:30f3\:30b7\:30e7\:30c3\:30c8"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.661641162829604*^9, 3.661641198584304*^9}, {
+  3.6620800022064734`*^9, 3.6620800037299232`*^9}, {3.662080258479794*^9, 
+  3.662080259663928*^9}}],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"{", "1", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "1"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "2", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "1"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"{", "3", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"3", ",", "3"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "0", "}"}], ",", 
+         RowBox[{"{", "1", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "2"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "0", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"2", ",", "2"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "0", "}"}], ",", 
+         RowBox[{"{", "1", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"0", ",", "0"}], "}"}]}], "}"}]}], "]"}]}], "}"}], ",", 
+   "111", ",", "1", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"0", ",", "3"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "0", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "3", "}"}], ",", 
+         RowBox[{"{", "2", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"1", ",", "3"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}]}], "}"}]}], "]"}], ",", "1", ",", 
+     RowBox[{"Tiling", "[", 
+      RowBox[{
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"{", "1", "}"}], ",", 
+         RowBox[{"{", "5", "}"}], ",", 
+         RowBox[{"{", "5", "}"}]}], "}"}], ",", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"3", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"5", ",", "5"}], "}"}]}], "}"}]}], "]"}]}], "}"}]}], 
+  "}"}]], "Input",
+ CellChangeTimes->{{3.662079149116386*^9, 3.662079292443179*^9}, {
+   3.662079435903164*^9, 3.662079510683352*^9}, {3.662079541491659*^9, 
+   3.662079656643448*^9}, {3.66207973461707*^9, 3.662079752178067*^9}, {
+   3.662079787641013*^9, 3.662079845395859*^9}, 3.662079878215555*^9, 
+   3.662079956340356*^9}],
+
+Cell[BoxData[
+ RowBox[{"{", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", 
+     "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", 
+     "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", 
+     "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}]}], 
+    "}"}], ",", "111", ",", "1", ",", 
+   RowBox[{"{", 
+    RowBox[{
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[1, 0, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[0, 1, 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], 
+         PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[1, 1, 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}], ",", "1", ",", 
+     GraphicsBox[
+      {EdgeForm[Thickness[Large]], {
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+        {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+        {RGBColor[1, 0, 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+        {RGBColor[1, 
+          NCache[
+           Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+        {RGBColor[
+          NCache[
+           Rational[1, 2], 0.5], 0., 1], 
+         PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}}]}], "}"}]}], 
+  "}"}]], "Output",
+ CellChangeTimes->{
+  3.6620792931014843`*^9, 3.6620795116734133`*^9, 3.662079619855811*^9, 
+   3.662079659093337*^9, 3.6620797536415586`*^9, {3.662079789888542*^9, 
+   3.6620798460420303`*^9}, 3.662079878614358*^9, 3.6620799569878273`*^9},
+ FontFamily->"Lucida Grande",
+ FontSize->12,
+ FontColor->RGBColor[1., 0.9999542229343099, 1.]]
+}, Open  ]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tiling", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "1", ",", "1", ",", "0", ",", "1"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "2", ",", "2", ",", "1", ",", "1", ",", "2"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2", ",", "2", ",", "2", ",", "1", ",", "2"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "0", ",", "0", ",", "2", ",", "2", ",", "2"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"1", ",", "1", ",", "1", ",", "0", ",", "0", ",", "0"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "3", ",", "1", ",", "1", ",", "1", ",", "1"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "2", ",", "1", ",", "2", ",", "3", ",", "1"}], "}"}], 
+     ",", 
+     RowBox[{"{", 
+      RowBox[{"5", ",", "5", ",", "5", ",", "5", ",", "5", ",", "5"}], 
+      "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{
+      "3", ",", "1", ",", "0", ",", "3", ",", "0", ",", "0", ",", "3"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "3", ",", "1", ",", "0", ",", "3", ",", "1", ",", "0"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "1", ",", "1", ",", "1", ",", "1", ",", "0", ",", "3", ",", "1"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2", ",", "2"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "0", ",", "3", ",", "3", ",", "0", ",", "0", ",", "0", ",", "0"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "3", ",", "1", ",", "3", ",", "0", ",", "3", ",", "3", ",", "1"}], 
+      "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{
+      "5", ",", "5", ",", "5", ",", "5", ",", "5", ",", "5", ",", "5"}], 
+      "}"}]}], "}"}]}], "]"}]], "Input",
+ CellChangeTimes->{{3.662080729052997*^9, 3.662080864560166*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  {EdgeForm[Thickness[Large]], {{
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, 0}, {6, 0}, {5, -1}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {6, -2}, {5, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{4, -2}, {4, 0}, {5, -1}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{6, -2}, {6, 0}, {5, -1}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{6, 0}, {8, 0}, {7, -1}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{6, -2}, {8, -2}, {7, -1}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{6, -2}, {6, 0}, {7, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -2}, {8, 0}, {7, -1}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{8, 0}, {10, 0}, {9, -1}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{8, -2}, {10, -2}, {9, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -2}, {8, 0}, {9, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -2}, {10, 0}, {9, -1}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{10, 0}, {12, 0}, {11, -1}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -2}, {12, -2}, {11, -1}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -2}, {10, 0}, {11, -1}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{12, -2}, {12, 0}, {11, -1}}]}}}, {{
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -2}, {4, -2}, {3, -3}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {4, -4}, {3, -3}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -4}, {2, -2}, {3, -3}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{4, -4}, {4, -2}, {3, -3}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -2}, {6, -2}, {5, -3}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -4}, {6, -4}, {5, -3}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -4}, {4, -2}, {5, -3}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -4}, {6, -2}, {5, -3}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{6, -2}, {8, -2}, {7, -3}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -4}, {8, -4}, {7, -3}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -4}, {6, -2}, {7, -3}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -4}, {8, -2}, {7, -3}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{8, -2}, {10, -2}, {9, -3}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{8, -4}, {10, -4}, {9, -3}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -4}, {8, -2}, {9, -3}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{10, -4}, {10, -2}, {9, -3}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -2}, {12, -2}, {11, -3}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -4}, {12, -4}, {11, -3}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{10, -4}, {10, -2}, {11, -3}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{12, -4}, {12, -2}, {11, -3}}]}}}, {{
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -4}, {4, -4}, {3, -5}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{2, -6}, {4, -6}, {3, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -6}, {2, -4}, {3, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{4, -6}, {4, -4}, {3, -5}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -4}, {6, -4}, {5, -5}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{4, -6}, {6, -6}, {5, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -6}, {4, -4}, {5, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{6, -6}, {6, -4}, {5, -5}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -4}, {8, -4}, {7, -5}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -6}, {8, -6}, {7, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{6, -6}, {6, -4}, {7, -5}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -6}, {8, -4}, {7, -5}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{8, -4}, {10, -4}, {9, -5}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{8, -6}, {10, -6}, {9, -5}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -6}, {8, -4}, {9, -5}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{10, -6}, {10, -4}, {9, -5}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -4}, {12, -4}, {11, -5}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -6}, {12, -6}, {11, -5}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{10, -6}, {10, -4}, {11, -5}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{12, -6}, {12, -4}, {11, -5}}]}}}, {{
+     {RGBColor[1, 0, 0], PolygonBox[{{0, -6}, {2, -6}, {1, -7}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, -8}, {2, -8}, {1, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -8}, {0, -6}, {1, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -8}, {2, -6}, {1, -7}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{2, -6}, {4, -6}, {3, -7}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -8}, {4, -8}, {3, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -8}, {2, -6}, {3, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -8}, {4, -6}, {3, -7}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{4, -6}, {6, -6}, {5, -7}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -8}, {6, -8}, {5, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{4, -8}, {4, -6}, {5, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -8}, {6, -6}, {5, -7}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -6}, {8, -6}, {7, -7}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -8}, {8, -8}, {7, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -8}, {6, -6}, {7, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{8, -8}, {8, -6}, {7, -7}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{8, -6}, {10, -6}, {9, -7}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -8}, {10, -8}, {9, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{8, -8}, {8, -6}, {9, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -8}, {10, -6}, {9, -7}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -6}, {12, -6}, {11, -7}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -8}, {12, -8}, {11, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{10, -8}, {10, -6}, {11, -7}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{12, -8}, {12, -6}, {11, -7}}]}}}, {{
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{0, -8}, {2, -8}, {1, -9}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -10}, {2, -10}, {1, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{0, -10}, {0, -8}, {1, -9}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -10}, {2, -8}, {1, -9}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -8}, {4, -8}, {3, -9}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -10}, {4, -10}, {3, -9}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -10}, {2, -8}, {3, -9}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{4, -10}, {4, -8}, {3, -9}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -8}, {6, -8}, {5, -9}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{4, -10}, {6, -10}, {5, -9}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{4, -10}, {4, -8}, {5, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -10}, {6, -8}, {5, -9}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -8}, {8, -8}, {7, -9}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{6, -10}, {8, -10}, {7, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -10}, {6, -8}, {7, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -10}, {8, -8}, {7, -9}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -8}, {10, -8}, {9, -9}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{8, -10}, {10, -10}, {9, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{8, -10}, {8, -8}, {9, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -10}, {10, -8}, {9, -9}}]}}, {
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -8}, {12, -8}, {11, -9}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{10, -10}, {12, -10}, {11, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{10, -10}, {10, -8}, {11, -9}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{12, -10}, {12, -8}, {11, -9}}]}}}, {{
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -10}, {2, -10}, {1, -11}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -12}, {2, -12}, {1, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{0, -12}, {0, -10}, {1, -11}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{2, -12}, {2, -10}, {1, -11}}]}}, {
+     {RGBColor[0, 1, 0], PolygonBox[{{2, -10}, {4, -10}, {3, -11}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -12}, {4, -12}, {3, -11}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{2, -12}, {2, -10}, {3, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{4, -12}, {4, -10}, {3, -11}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -10}, {6, -10}, {5, -11}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -12}, {6, -12}, {5, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{4, -12}, {4, -10}, {5, -11}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -12}, {6, -10}, {5, -11}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{6, -10}, {8, -10}, {7, -11}}]}, 
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -12}, {8, -12}, {7, -11}}]}, 
+     {RGBColor[1, 0, 0], PolygonBox[{{6, -12}, {6, -10}, {7, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -12}, {8, -10}, {7, -11}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{8, -10}, {10, -10}, {9, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -12}, {10, -12}, {9, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -12}, {8, -10}, {9, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{10, -12}, {10, -10}, {9, -11}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{10, -10}, {12, -10}, {11, -11}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{10, -12}, {12, -12}, {11, -11}}]}, 
+     {RGBColor[0, 1, 0], PolygonBox[{{10, -12}, {10, -10}, {11, -11}}]}, 
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{12, -12}, {12, -10}, {11, -11}}]}}}, {{
+     {RGBColor[1, 1, 0], PolygonBox[{{0, -12}, {2, -12}, {1, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{0, -14}, {2, -14}, {1, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{0, -14}, {0, -12}, {1, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{2, -14}, {2, -12}, {1, -13}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{2, -12}, {4, -12}, {3, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{2, -14}, {4, -14}, {3, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{2, -14}, {2, -12}, {3, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{4, -14}, {4, -12}, {3, -13}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], PolygonBox[{{4, -12}, {6, -12}, {5, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{4, -14}, {6, -14}, {5, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{4, -14}, {4, -12}, {5, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{6, -14}, {6, -12}, {5, -13}}]}}, {
+     {RGBColor[1, 1, 0], PolygonBox[{{6, -12}, {8, -12}, {7, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{6, -14}, {8, -14}, {7, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{6, -14}, {6, -12}, {7, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{8, -14}, {8, -12}, {7, -13}}]}}, {
+     {RGBColor[0, 1, 0], PolygonBox[{{8, -12}, {10, -12}, {9, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{8, -14}, {10, -14}, {9, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{8, -14}, {8, -12}, {9, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{10, -14}, {10, -12}, {9, -13}}]}}, {
+     {RGBColor[1, 
+       NCache[
+        Rational[1, 2], 0.5], 0], 
+      PolygonBox[{{10, -12}, {12, -12}, {11, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{10, -14}, {12, -14}, {11, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{10, -14}, {10, -12}, {11, -13}}]}, 
+     {RGBColor[
+       NCache[
+        Rational[1, 2], 0.5], 0., 1], 
+      PolygonBox[{{12, -14}, {12, -12}, {11, -13}}]}}}}]], "Output",
+ CellChangeTimes->{3.662080865250929*^9}]
 }, Open  ]]
 },
-WindowSize->{1252, 684},
-WindowMargins->{{4, Automatic}, {0, Automatic}},
+WindowSize->{966, 685},
+WindowMargins->{{77, Automatic}, {Automatic, 0}},
 FrontEndVersion->"10.0 for Mac OS X x86 (32-bit, 64-bit Kernel) (2014\:5e747\
 \:67089\:65e5)",
 StyleDefinitions->"Default.nb"
@@ -2091,33 +3144,42 @@ Cell[558, 20, 285, 7, 28, "Input"],
 Cell[846, 29, 2224, 57, 97, "Input"],
 Cell[CellGroupData[{
 Cell[3095, 90, 1536, 35, 46, "Input"],
-Cell[4634, 127, 2236, 36, 87, "Output"]
+Cell[4634, 127, 2258, 36, 87, "Output"]
 }, Open  ]],
-Cell[6885, 166, 6804, 194, 183, "Input"],
+Cell[6907, 166, 6804, 194, 251, "Input"],
 Cell[CellGroupData[{
-Cell[13714, 364, 1327, 33, 28, "Input"],
-Cell[15044, 399, 6414, 118, 374, "Output"]
-}, Open  ]],
-Cell[CellGroupData[{
-Cell[21495, 522, 1095, 28, 28, "Input"],
-Cell[22593, 552, 6546, 151, 374, "Output"]
+Cell[13736, 364, 1327, 33, 46, "Input"],
+Cell[15066, 399, 6440, 119, 374, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[29176, 708, 998, 26, 28, "Input"],
-Cell[30177, 736, 6208, 144, 374, "Output"]
+Cell[21543, 523, 1095, 28, 46, "Input"],
+Cell[22641, 553, 6574, 152, 374, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[36422, 885, 1047, 27, 28, "Input"],
-Cell[37472, 914, 5564, 123, 374, "Output"]
+Cell[29252, 710, 998, 26, 46, "Input"],
+Cell[30253, 738, 6232, 145, 374, "Output"]
 }, Open  ]],
 Cell[CellGroupData[{
-Cell[43073, 1042, 3776, 94, 114, "Input"],
-Cell[46852, 1138, 35599, 777, 374, "Output"]
+Cell[36522, 888, 1047, 27, 46, "Input"],
+Cell[37572, 917, 5589, 124, 374, "Output"]
 }, Open  ]],
-Cell[82466, 1918, 292, 5, 32, "Input"],
 Cell[CellGroupData[{
-Cell[82783, 1927, 1856, 55, 46, "Input"],
-Cell[84642, 1984, 3675, 85, 233, "Output"]
+Cell[43198, 1046, 3776, 94, 148, "Input"],
+Cell[46977, 1142, 35624, 778, 374, "Output"]
+}, Open  ]],
+Cell[82616, 1923, 292, 5, 32, "Input"],
+Cell[CellGroupData[{
+Cell[82933, 1932, 1856, 55, 63, "Input"],
+Cell[84792, 1989, 3697, 85, 233, "Output"]
+}, Open  ]],
+Cell[88504, 2077, 394, 7, 32, "Input"],
+Cell[CellGroupData[{
+Cell[88923, 2088, 6278, 189, 199, "Input"],
+Cell[95204, 2279, 16183, 443, 478, "Output"]
+}, Open  ]],
+Cell[CellGroupData[{
+Cell[111424, 2727, 1968, 59, 80, "Input"],
+Cell[113395, 2788, 14935, 334, 432, "Output"]
 }, Open  ]]
 }
 ]

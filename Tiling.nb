@@ -10,10 +10,10 @@
 NotebookFileLineBreakTest
 NotebookFileLineBreakTest
 NotebookDataPosition[       158,          7]
-NotebookDataLength[    156720,       3941]
-NotebookOptionsPosition[    154859,       3876]
-NotebookOutlinePosition[    155223,       3892]
-CellTagsIndexPosition[    155180,       3889]
+NotebookDataLength[    174571,       4379]
+NotebookOptionsPosition[    172341,       4303]
+NotebookOutlinePosition[    172705,       4319]
+CellTagsIndexPosition[    172662,       4316]
 WindowFrame->Normal*)
 
 (* Beginning of Notebook Content *)
@@ -3872,6 +3872,433 @@ Cell[BoxData[
         Rational[5, 6], 0.8333333333333334]], 
       PolygonBox[{{8, -8}, {8, -6}, {7, -7}}]}}}}]], "Output",
  CellChangeTimes->{3.6621539965472507`*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{"(*", 
+  RowBox[{
+  "\:30b0\:30ec", "\:30fc", "\:30b9\:30b1", "\:30fc", 
+   "\:30eb\:7248\:3082\:8a66\:4f5c"}], "*)"}]], "Input",
+ CellChangeTimes->{{3.662154079786024*^9, 3.6621540915658627`*^9}, {
+  3.66215443681435*^9, 3.6621544428937187`*^9}}],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Color3", "[", 
+   RowBox[{"i_", ",", "c_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{"x", ",", "r", ",", "g", ",", "b", ",", "x2"}], "}"}], ",", 
+    RowBox[{
+     RowBox[{"x", "=", 
+      RowBox[{"i", "/", 
+       RowBox[{"(", 
+        RowBox[{"c", "+", "1"}], ")"}]}]}], ";", 
+     RowBox[{"r", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"Min", "[", 
+         RowBox[{"1", ",", 
+          RowBox[{"3", "-", 
+           RowBox[{"6", "x"}]}]}], "]"}], ",", 
+        RowBox[{
+         RowBox[{"3", "x"}], "-", "2"}]}], "]"}]}], ";", 
+     RowBox[{"g", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"Min", "[", 
+         RowBox[{"1", ",", 
+          RowBox[{"3", "x"}], ",", 
+          RowBox[{"2.5", "-", 
+           RowBox[{"3", "x"}]}]}], "]"}]}], "]"}]}], ";", 
+     RowBox[{"b", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"0", ",", 
+        RowBox[{"Min", "[", 
+         RowBox[{"1", ",", 
+          RowBox[{
+           RowBox[{"6", "x"}], "-", "3"}], ",", 
+          RowBox[{"6", "-", 
+           RowBox[{"6", "x"}]}]}], "]"}]}], "]"}]}], ";", 
+     "\[IndentingNewLine]", 
+     RowBox[{"x2", "=", 
+      RowBox[{
+       RowBox[{"0.3", "*", "r"}], "+", 
+       RowBox[{"0.6", "*", "g"}], "+", 
+       RowBox[{"0.1", "*", "b"}]}]}], ";", 
+     RowBox[{"RGBColor", "[", 
+      RowBox[{"x2", ",", "x2", ",", "x2"}], "]"}]}]}], "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwd0n0sFHAYB/CTibRMVqhuV3aOyznj4th5GRul60okdVIWqdPmboYc7hRp
+d8lJkctWTY6LEV0mJpq40oZeLBqG0CXUFBUt0n1/fzz77Hn+ePbds8chThKR
+sI5CoQQYC4p4hzIi/OaC3iqGZLAsqioPFuhOXYHMBH0+LKGb3YAesgI9tFWK
+XkL33ugeuDacRNx31mUSap3Gp2Br8cAsvBR7eg625WiWYM+XvD/QYSbkYiT2
+5L4h0h+phUeNfku5Fg/F53PuHjdKU9Rr4PO12Y9wuNnCACukjjZCo9Fu2faQ
+qn7PgBSqcg9Uvmb4wmq+KBA+WFoIgWvS7r1Qms87CO+0J4bBc1PWkTAzv/Uk
+VNf2xkPJwoIYap/I0yAtPJfI8PfOgquCCRlM1dXWwM3cUeLXcU4zFHYIWqB7
+8oF2aB5u3gUfGxRT0CrBwgALp+Lm4UrjpkUYzBhYgp22lstQr7S2ijb6MHN5
+M0xiCe3girNqO6S6y5mkD+a6wg/pvzjQUbzbC9o4sELJPHCBD6UmYylQ622e
+Cov6FHJopVwjRnZVFcGKf0nFsG2Lqhwe4YxoYdPhq3Ww8fblBmgyO90E3apL
+WuCZRfULuDFr2yvYsLVsDHauv09kduUYoGjXzhmSS1f4HUq63xE7mTTbE7ib
+PN0ODs53UCHVfpHIyzB1gPUCGlH6w8cJFvI92VCfPeEB7ed3cKBMHBcO+ZWl
+xFzTOjHUsinJMOXz00yY6vybSBniKqDX34Cb8JlfmgaWTyZWQh+30RpYemu1
+FtKnO3RQqXFtgmZqST+8bllF7BOxRmC/mE38KXf5BO8FcYiDXBU7Bnn9i4iy
+tnEOtFNt8IRloau8GPIPAl/IMo/lw6hjDcTG0Qt8k/3GXHRmGPwP3qDPEA==
+
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[{
+ RowBox[{
+  RowBox[{"j", "=", "5"}], ";"}], "\[IndentingNewLine]", 
+ RowBox[{"Graphics", "[", 
+  RowBox[{"Table", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+      RowBox[{"Color3", "[", 
+       RowBox[{"i", ",", "j"}], "]"}], ",", 
+      RowBox[{"Polygon", "[", 
+       RowBox[{"{", 
+        RowBox[{
+         RowBox[{"{", 
+          RowBox[{"i", ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"i", "+", "1"}], ",", "0"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"i", "+", "1"}], ",", "1"}], "}"}], ",", 
+         RowBox[{"{", 
+          RowBox[{"i", ",", "1"}], "}"}]}], "}"}], "]"}]}], "}"}], ",", 
+    RowBox[{"{", 
+     RowBox[{"i", ",", "0", ",", "j"}], "}"}]}], "]"}], "]"}]}], "Input",
+ CellChangeTimes->{
+  3.6621539450706882`*^9, {3.662154372980077*^9, 3.66215437310816*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[{
+   {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{0, 0}, {1, 0}, {1, 1}, {0, 1}}]}, 
+   {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{1, 0}, {2, 0}, {2, 1}, {1, 1}}]}, 
+   {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+    PolygonBox[{{2, 0}, {3, 0}, {3, 1}, {2, 1}}]}, 
+   {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{3, 0}, {4, 0}, {4, 1}, {3, 1}}]}, 
+   {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{4, 0}, {5, 0}, {5, 1}, {4, 1}}]}, 
+   {RGBColor[0.25, 0.25, 0.25], 
+    PolygonBox[{{5, 0}, {6, 0}, {6, 1}, {5, 1}}]}}]], "Output",
+ CellChangeTimes->{3.662154373842225*^9}]
+}, Open  ]],
+
+Cell[BoxData[
+ RowBox[{
+  RowBox[{"Tiling3", "[", 
+   RowBox[{"h_", ",", "v_"}], "]"}], ":=", 
+  RowBox[{"Module", "[", 
+   RowBox[{
+    RowBox[{"{", 
+     RowBox[{
+     "n", ",", "m", ",", "c", ",", "TriT", ",", "TriB", ",", "TriL", ",", 
+      "TriR"}], "}"}], ",", "\[IndentingNewLine]", 
+    RowBox[{
+     RowBox[{"n", "=", 
+      RowBox[{
+       RowBox[{"Length", "[", "h", "]"}], "-", "1"}]}], ";", 
+     RowBox[{"(*", "\:7e26\:306e\:9577\:3055", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"m", "=", 
+      RowBox[{
+       RowBox[{"Length", "[", 
+        RowBox[{"Flatten", "[", "h", "]"}], "]"}], "/", 
+       RowBox[{"Length", "[", "h", "]"}]}]}], ";", 
+     RowBox[{"(*", "\:6a2a\:306e\:9577\:3055", "*)"}], "\[IndentingNewLine]", 
+     
+     RowBox[{"c", "=", 
+      RowBox[{"Max", "[", 
+       RowBox[{"Join", "[", 
+        RowBox[{"h", ",", "v"}], "]"}], "]"}]}], ";", 
+     RowBox[{"(*", "\:8272\:306e\:6570\:5024\:306e\:6700\:5927\:5024", "*)"}],
+      "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TriT", "[", 
+       RowBox[{"s_", ",", "t_"}], "]"}], ":=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Color3", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"h", "[", 
+            RowBox[{"[", "s", "]"}], "]"}], "[", 
+           RowBox[{"[", "t", "]"}], "]"}], ",", "c"}], "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "2"}], ",", 
+             RowBox[{"2", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"2", "t"}], ",", 
+             RowBox[{"2", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "1"}], ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}]}], "}"}], "]"}]}], "}"}]}], ";", 
+     RowBox[{"(*", "\:4e0a\:8fba\:306e\:4e09\:89d2\:5f62", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TriB", "[", 
+       RowBox[{"s_", ",", "t_"}], "]"}], ":=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Color3", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"h", "[", 
+            RowBox[{"[", 
+             RowBox[{"s", "+", "1"}], "]"}], "]"}], "[", 
+           RowBox[{"[", "t", "]"}], "]"}], ",", "c"}], "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "2"}], ",", 
+             RowBox[{
+              RowBox[{"-", "2"}], "s"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"2", "t"}], ",", 
+             RowBox[{
+              RowBox[{"-", "2"}], "s"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "1"}], ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}]}], "}"}], "]"}]}], "}"}]}], ";", 
+     RowBox[{"(*", "\:4e0b\:8fba\:306e\:4e09\:89d2\:5f62", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TriL", "[", 
+       RowBox[{"s_", ",", "t_"}], "]"}], ":=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Color3", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"v", "[", 
+            RowBox[{"[", "s", "]"}], "]"}], "[", 
+           RowBox[{"[", "t", "]"}], "]"}], ",", "c"}], "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "2"}], ",", 
+             RowBox[{
+              RowBox[{"-", "2"}], "s"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "2"}], ",", 
+             RowBox[{"2", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "1"}], ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}]}], "}"}], "]"}]}], "}"}]}], ";", 
+     RowBox[{"(*", "\:5de6\:8fba\:306e\:4e09\:89d2\:5f62", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{
+      RowBox[{"TriR", "[", 
+       RowBox[{"s_", ",", "t_"}], "]"}], ":=", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"Color3", "[", 
+         RowBox[{
+          RowBox[{
+           RowBox[{"v", "[", 
+            RowBox[{"[", "s", "]"}], "]"}], "[", 
+           RowBox[{"[", 
+            RowBox[{"t", "+", "1"}], "]"}], "]"}], ",", "c"}], "]"}], ",", 
+        RowBox[{"Polygon", "[", 
+         RowBox[{"{", 
+          RowBox[{
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"2", "t"}], ",", 
+             RowBox[{
+              RowBox[{"-", "2"}], "s"}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{"2", "t"}], ",", 
+             RowBox[{"2", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}], ",", 
+           RowBox[{"{", 
+            RowBox[{
+             RowBox[{
+              RowBox[{"2", "t"}], "-", "1"}], ",", 
+             RowBox[{"1", "-", 
+              RowBox[{"2", "s"}]}]}], "}"}]}], "}"}], "]"}]}], "}"}]}], ";", 
+     RowBox[{"(*", "\:5de6\:8fba\:306e\:4e09\:89d2\:5f62", "*)"}], 
+     "\[IndentingNewLine]", 
+     RowBox[{"Graphics", "[", 
+      RowBox[{"{", 
+       RowBox[{
+        RowBox[{"EdgeForm", "[", "Thick", "]"}], ",", 
+        RowBox[{"Table", "[", 
+         RowBox[{
+          RowBox[{"Table", "[", 
+           RowBox[{
+            RowBox[{"{", 
+             RowBox[{
+              RowBox[{"TriT", "[", 
+               RowBox[{"s", ",", "t"}], "]"}], ",", 
+              RowBox[{"TriB", "[", 
+               RowBox[{"s", ",", "t"}], "]"}], ",", 
+              RowBox[{"TriL", "[", 
+               RowBox[{"s", ",", "t"}], "]"}], ",", 
+              RowBox[{"TriR", "[", 
+               RowBox[{"s", ",", "t"}], "]"}]}], "}"}], ",", 
+            RowBox[{"{", 
+             RowBox[{"t", ",", "m"}], "}"}]}], "]"}], ",", 
+          RowBox[{"{", 
+           RowBox[{"s", ",", "n"}], "}"}]}], "]"}]}], "}"}], "]"}]}]}], 
+   "]"}]}]], "Input",
+ CellChangeTimes->CompressedData["
+1:eJwdyk8oQwEAx/EhalNzMJfZP7bkYJKmhlc2bG1OvPfYyGqpFWtraawduEhy
+8metkbTNahfSdqWYSbHDSG1ajBY3T5lCYgfvt8OvT/36Nk25SFslh8MRsoN6
+D7U5QjDax4XtALx/kUQg0W6PwrkD1SFM3s3G4I/6Mw0VAfoWTjvzOchr5Och
+88F9hv3jJ2VDweIrjIszDFw5/q0nWbMPTiHUKEwyuOYTNMP1nQwJDdaYGbqU
+N9UUa22BWwNFEUIOpV9uBbSvZrvgWN1gN5SkHX1Q08roYHErZaRZfYmBYXhl
+CdHw2y8zwXdbdBLmvSkLNEwk5qEguL8IZT2iJagbcmyU//CeH167zWewSh6+
+gGoifgn5uaO/chfglWCwI9kyyupx29rgrnpGBTuVll54XmgQVxgZ7elySQop
+jZ6E3rcnCv4D9w69lw==
+  "]],
+
+Cell[CellGroupData[{
+
+Cell[BoxData[
+ RowBox[{"Tiling3", "[", 
+  RowBox[{
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0", ",", "0", ",", "1"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "0", ",", "1", ",", "0"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"0", ",", "1", ",", "1", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"2", ",", "5", ",", "1", ",", "5"}], "}"}]}], "}"}], ",", 
+   RowBox[{"{", 
+    RowBox[{
+     RowBox[{"{", 
+      RowBox[{"4", ",", "0", ",", "5", ",", "5", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "0", ",", "5", ",", "5", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"3", ",", "3", ",", "3", ",", "5", ",", "5"}], "}"}], ",", 
+     RowBox[{"{", 
+      RowBox[{"4", ",", "4", ",", "4", ",", "0", ",", "5"}], "}"}]}], "}"}]}],
+   "]"}]], "Input",
+ CellChangeTimes->{{3.655517077832561*^9, 3.6555170778439293`*^9}, 
+   3.662153995818411*^9, {3.662154410313731*^9, 3.662154410451261*^9}}],
+
+Cell[BoxData[
+ GraphicsBox[
+  {EdgeForm[Thickness[Large]], {{
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, 0}, {2, 0}, {1, -1}}]}, 
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, -2}, {2, -2}, {1, -1}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{0, -2}, {0, 0}, {1, -1}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -2}, {2, 0}, {1, -1}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, 0}, {4, 0}, {3, -1}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -2}, {4, -2}, {3, -1}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -2}, {2, 0}, {3, -1}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{4, -2}, {4, 0}, {3, -1}}]}}, {
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, 0}, {6, 0}, {5, -1}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{4, -2}, {6, -2}, {5, -1}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{4, -2}, {4, 0}, {5, -1}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -2}, {6, 0}, {5, -1}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{6, 0}, {8, 0}, {7, -1}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{6, -2}, {8, -2}, {7, -1}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -2}, {6, 0}, {7, -1}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{8, -2}, {8, 0}, {7, -1}}]}}}, {{
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, -2}, {2, -2}, {1, -3}}]}, 
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, -4}, {2, -4}, {1, -3}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{0, -4}, {0, -2}, {1, -3}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -4}, {2, -2}, {1, -3}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -2}, {4, -2}, {3, -3}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -4}, {4, -4}, {3, -3}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -4}, {2, -2}, {3, -3}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{4, -4}, {4, -2}, {3, -3}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{4, -2}, {6, -2}, {5, -3}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -4}, {6, -4}, {5, -3}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{4, -4}, {4, -2}, {5, -3}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{6, -4}, {6, -2}, {5, -3}}]}}, {
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{6, -2}, {8, -2}, {7, -3}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{6, -4}, {8, -4}, {7, -3}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -4}, {6, -2}, {7, -3}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{8, -4}, {8, -2}, {7, -3}}]}}}, {{
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, -4}, {2, -4}, {1, -5}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{0, -6}, {2, -6}, {1, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{0, -6}, {0, -4}, {1, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{2, -6}, {2, -4}, {1, -5}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{2, -4}, {4, -4}, {3, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{2, -6}, {4, -6}, {3, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{2, -6}, {2, -4}, {3, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -6}, {4, -4}, {3, -5}}]}}, {
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -4}, {6, -4}, {5, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -6}, {6, -6}, {5, -5}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -6}, {4, -4}, {5, -5}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{6, -6}, {6, -4}, {5, -5}}]}}, {
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{6, -4}, {8, -4}, {7, -5}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -6}, {8, -6}, {7, -5}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -6}, {6, -4}, {7, -5}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{8, -6}, {8, -4}, {7, -5}}]}}}, {{
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{0, -6}, {2, -6}, {1, -7}}]}, 
+     {RGBColor[0.8999999999999999, 0.8999999999999999, 0.8999999999999999], 
+      PolygonBox[{{0, -8}, {2, -8}, {1, -7}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{0, -8}, {0, -6}, {1, -7}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{2, -8}, {2, -6}, {1, -7}}]}}, {
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{2, -6}, {4, -6}, {3, -7}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{2, -8}, {4, -8}, {3, -7}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{2, -8}, {2, -6}, {3, -7}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{4, -8}, {4, -6}, {3, -7}}]}}, {
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -6}, {6, -6}, {5, -7}}]}, 
+     {RGBColor[0.6, 0.6, 0.6], PolygonBox[{{4, -8}, {6, -8}, {5, -7}}]}, 
+     {RGBColor[0.4, 0.4, 0.4], PolygonBox[{{4, -8}, {4, -6}, {5, -7}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{6, -8}, {6, -6}, {5, -7}}]}}, {
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -6}, {8, -6}, {7, -7}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], PolygonBox[{{6, -8}, {8, -8}, {7, -7}}]}, 
+     {RGBColor[0.3, 0.3, 0.3], PolygonBox[{{6, -8}, {6, -6}, {7, -7}}]}, 
+     {RGBColor[0.25, 0.25, 0.25], 
+      PolygonBox[{{8, -8}, {8, -6}, {7, -7}}]}}}}]], "Output",
+ CellChangeTimes->{3.66215441105513*^9}]
 }, Open  ]]
 },
 WindowSize->{966, 685},
@@ -3897,7 +4324,7 @@ Cell[CellGroupData[{
 Cell[3095, 90, 1536, 35, 46, "Input"],
 Cell[4634, 127, 2280, 36, 87, "Output"]
 }, Open  ]],
-Cell[6929, 166, 6804, 194, 285, "Input"],
+Cell[6929, 166, 6804, 194, 251, "Input"],
 Cell[CellGroupData[{
 Cell[13758, 364, 1327, 33, 46, "Input"],
 Cell[15088, 399, 6462, 119, 374, "Output"]
@@ -3942,6 +4369,17 @@ Cell[134395, 3262, 6830, 195, 251, "Input"],
 Cell[CellGroupData[{
 Cell[141250, 3461, 1025, 27, 46, "Input"],
 Cell[142278, 3490, 12565, 383, 374, "Output"]
+}, Open  ]],
+Cell[154858, 3876, 270, 6, 32, "Input"],
+Cell[155131, 3884, 2449, 64, 114, "Input"],
+Cell[CellGroupData[{
+Cell[157605, 3952, 879, 26, 46, "Input"],
+Cell[158487, 3980, 602, 10, 87, "Output"]
+}, Open  ]],
+Cell[159104, 3993, 6842, 195, 251, "Input"],
+Cell[CellGroupData[{
+Cell[165971, 4192, 1071, 27, 46, "Input"],
+Cell[167045, 4221, 5280, 79, 374, "Output"]
 }, Open  ]]
 }
 ]

@@ -1394,4 +1394,4 @@ Goal (tiling_nm2 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ =
 print.
 Abort.
 
-Extraction "/tmp/TilingProgram.ml" tiling_nm.
+Extraction "/tmp/TilingProgram.ml" tiling_nm boundary22a boundary22b boundary22c boundary44a boundary44b boundary44c.

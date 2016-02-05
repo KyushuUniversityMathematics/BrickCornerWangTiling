@@ -5,6 +5,8 @@
  % **)
 
 Require Import ssreflect ssrnat.
+Require Import ExtrOcamlNatInt ExtrOcamlString.
+
 Coercion istrue (b : bool) := is_true b.
 
 (** %
@@ -465,7 +467,9 @@ Compute (tiling 1 2 (fun _ j => match j with 1 => 2 | _ => 1 end) e_12 e'_12).
 \end{verbatim}
  % **)
 
-Compute (tiling 2 2 (fun _ _ => 0) e_22 e'_22).
+Definition boundary22a (i j:nat) := 0.
+
+Compute (tiling 2 2 boundary22a e_22 e'_22).
 (** % 
 \begin{verbatim}
      = (^ :: 0 :: ^ :: 0 :: ^ :: nil)
@@ -477,7 +481,10 @@ Compute (tiling 2 2 (fun _ _ => 0) e_22 e'_22).
 \end{verbatim}
  % **)
 
-Compute (tiling 2 2 (fun i j => match i with 0 => 2 | _ => match j with 0 => 0 | _ => 1 end end) e_22 e'_22).
+Definition boundary22b (i j:nat) :=
+  match i with 0 => 2 | _ => match j with 0 => 0 | _ => 1 end end.
+
+Compute (tiling 2 2 boundary22b e_22 e'_22).
 (** % 
 \begin{verbatim}
      = (^ :: 2 :: ^ :: 2 :: ^ :: nil)
@@ -489,7 +496,10 @@ Compute (tiling 2 2 (fun i j => match i with 0 => 2 | _ => match j with 0 => 0 |
 \end{verbatim}
  % **)
 
-Compute (tiling 2 2 (fun i j => match j with 1 => 2 | 3 => 1 | _ => match i with 1 => 0 | _ => 1 end end) e_22 e'_22).
+Definition boundary22c (i j:nat) :=
+  match j with 1 => 2 | 3 => 1 | _ => match i with 1 => 0 | _ => 1 end end.
+
+Compute (tiling 2 2 boundary22c e_22 e'_22).
 (** % 
 \begin{verbatim}
      = (^ :: 2 :: ^ :: 1 :: ^ :: nil)
@@ -575,7 +585,10 @@ Compute (tiling 2 4 (bnm_to_bmn (fun i j => match j with 1 => 2 | 3 => 1 | _ => 
 \end{verbatim}
  % **)
 
-Compute (tiling_nm 4 4 (fun i j => match i with 0 => 2 | 3 => match j with 0 => 5 | _ => 1 end | _ => match j with 1 => 3 | _ => 4 end end)).
+Definition boundary44a (i j:nat) :=
+  match i with 0 => 2 | 3 => match j with 0 => 5 | _ => 1 end | _ => match j with 1 => 3 | _ => 4 end end.
+
+Compute (tiling_nm 4 4 boundary44a).
 (** % 
 \begin{verbatim}
      = (^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: 2 :: ^ :: nil)
@@ -591,7 +604,10 @@ Compute (tiling_nm 4 4 (fun i j => match i with 0 => 2 | 3 => match j with 0 => 
 \end{verbatim}
  % **)
 
-Compute (tiling_nm 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ => 4 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 5 end end)).
+Definition boundary44b (i j:nat) :=
+  match j with 0 => match i with 2 | 3 => 3 | _ => 4 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 5 end end.
+
+Compute (tiling_nm 4 4 boundary44b).
 (** % 
 \begin{verbatim}
      = (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
@@ -607,7 +623,10 @@ Compute (tiling_nm 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _
 \end{verbatim}
  % **)
 
-Compute (tiling_nm 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ => 2 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 1 end end)).
+Definition boundary44c (i j:nat) :=
+  match j with 0 => match i with 2 | 3 => 3 | _ => 2 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 1 end end.
+
+Compute (tiling_nm 4 4 boundary44c).
 (** % 
 \begin{verbatim}
      = (^ :: 2 :: ^ :: 0 :: ^ :: 1 :: ^ :: 0 :: ^ :: nil)
@@ -1374,3 +1393,5 @@ Ltac print := compute; match goal with |- ?x => idtac x end.
 Goal (tiling_nm2 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ => 2 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 1 end end)).
 print.
 Abort.
+
+Extraction "/tmp/TilingProgram.ml" tiling_nm.

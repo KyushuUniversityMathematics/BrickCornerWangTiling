@@ -4,7 +4,7 @@
 \section{Preference}
  % **)
 
-Require Import ssreflect ssrnat.
+Require Import Ssreflect.ssreflect Ssreflect.ssrnat.
 Require Import ExtrOcamlNatInt ExtrOcamlString.
 
 Coercion istrue (b : bool) := is_true b.

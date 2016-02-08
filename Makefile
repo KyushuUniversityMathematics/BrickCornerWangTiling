@@ -1,7 +1,8 @@
-.SUFFIXES: .svg .png .v .ml
+.SUFFIXES: .svg .png
+.SUFFIXES: .v .ml
 .svg.png:
 	rsvg-convert $< > $@
-.ml.v:
+.v.ml:
 	coqc $<
 
 examplepng = b22a.png b22b.png b22c.png b44a.png b44b.png b44c.png

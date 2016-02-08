@@ -13,12 +13,9 @@ all: TilingRender
 TilingRender: TilingProgram.ml TilingRender.ml
 	ocamlc TilingProgram.ml TilingRender.ml -o TilingRender
 
-svg.made: TilingRender
+png: TilingRender
 	./TilingRender
-	touch svg.made
-
-png: svg.made $(examplepng)
-	@echo $(examplepng)
+	make $(examplepng)
 
 clean:
-	rm -f *.cmo *.cmi *.png *.svg svg.made
+	rm -f *.cmo *.cmi *.png *.svg 

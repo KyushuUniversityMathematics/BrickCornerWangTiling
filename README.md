@@ -12,3 +12,5 @@ Verification of A Brick Corner Wang Tiling Algorithm
 - You may use some external program such as 'rsvg-convert' to convert the image format from ".svg" to ".png" or ".pdf".  
      eg.  rsvg-convert b44a.svg > b44a.png  
           rsvg-convert -f pdf -o b44a.pdf b44a.svg
+
+<img src="https://github.com/KyushuUniversityMathematics/BrickCornerWangTiling/raw/master/images/b44a.png"/>

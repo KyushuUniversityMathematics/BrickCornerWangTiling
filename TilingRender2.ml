@@ -50,6 +50,8 @@ let svg_tiling colors size stroke_width stroke_color n m boundary filename =
 
 	let hv_max = max (max_f2 h n m) (max_f2 v n m) in
 	
+	let border = stroke_width / 2 in
+	
 	let stream = open_out filename in
 
 	let svg_tile i j = 
@@ -57,7 +59,7 @@ let svg_tiling colors size stroke_width stroke_color n m boundary filename =
 		and l = v (j+1) i
 		and b = h (j+1) (i+1)
 		and r = v (j+1) (i+1) in
-		let x = i * size and y = j * size in
+		let x = i * size + border and y = j * size + border in
 		let x' = x + size and y' = y + size 
 		and cx = x + size / 2 and cy = y + size / 2 in
 		svg_triangle stream x y cx cy x' y (colors t hv_max) stroke_color stroke_width ;
@@ -72,7 +74,7 @@ let svg_tiling colors size stroke_width stroke_color n m boundary filename =
 		| i, j -> (svg_tile i j ; aux (i-1) j)
 	in
 
-	svg_header stream (n * size) (m * size);
+	svg_header stream (n * size + 2 * border) (m * size + 2 * border);
 	aux (n-1) (m-1);
 	svg_footer stream;
 	close_out stream
@@ -91,7 +93,7 @@ let string_of_0x n = match n with
     | n -> "F"
 let colors i c = "#" ^ (string_of_0x ((red i c) / 16)) ^ (string_of_0x ((red i c) mod 16)) ^ (string_of_0x ((green i c) / 16)) ^ (string_of_0x ((green i c) mod 16)) ^ (string_of_0x ((blue i c) / 16)) ^ (string_of_0x ((blue i c) mod 16))
 let tile_size = 50
-let stroke_width = 1
+let stroke_width = 2
 let stroke_color = "#000000"
 
 let () = 

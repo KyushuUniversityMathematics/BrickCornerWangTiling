@@ -10,26 +10,13 @@ examplesvg = b22a.svg b22b.svg b22c.svg b44a.svg b44b.svg b44c.svg
 
 all: TilingRender
 
-all2: TilingRender2
-
 TilingRender: TilingProgram.ml TilingRender.ml
 	-rm TilingProgram.mli
 	ocamlc TilingProgram.ml TilingRender.ml -o TilingRender
-
-TilingRender2: TilingProgram.ml TilingRender2.ml
-	-rm TilingProgram.mli
-	ocamlc TilingProgram.ml TilingRender2.ml -o TilingRender2
 
 png: TilingRender
 	./TilingRender
 	make $(examplepng)
 
-png2: TilingRender2
-	./TilingRender2
-	make $(examplepng)
-
 clean:
 	rm -f *.cmo *.cmi *.png *.svg ./TilingRender ./TilingProgram.ml
-
-clean2:
-	rm -f *.cmo *.cmi *.png *.svg ./TilingRender2 ./TilingProgram.ml

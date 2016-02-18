@@ -83,7 +83,10 @@ let svg_tiling colors size stroke_width stroke_color n m boundary filename =
 let red i c = max 0 (max (min 255 (3 * 255 - 6 * 255 * i / (c+1))) (3 * 255 * i / (c+1) - 2 * 255))
 let green i c = max 0 (min 255 (min (3 * 255 * i / (c+1)) (5 * 255 / 2 - 3 * 255 * i / (c+1))))
 let blue i c = max 0 (min 255 (min (6 * 255 * i / (c+1) - 3 * 255) (6 * 255 - 6 * 255 * i / (c+1))))
-let colors i c = Printf.sprintf "#%X%X%X" (red i c) (green i c) (blue i c)
+let le9 n = match (n / 10) with
+    | 0 -> "0"
+    | _ -> ""
+let colors i c = Printf.sprintf "#%s%X%s%X%s%X" (le9 (red i c)) (red i c) (le9 (green i c)) (green i c) (le9 (blue i c)) (blue i c)
 let tile_size = 50
 let stroke_width = 2
 let stroke_color = "#000000"

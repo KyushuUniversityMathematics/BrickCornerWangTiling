@@ -4,14 +4,122 @@
 \section{Preference}
  % **)
 
-Require Import Ssreflect.ssreflect Ssreflect.ssrnat.
+Require Import Ssreflect.ssreflect Ssreflect.ssrnat Ssreflect.ssrbool Ssreflect.ssrfun Ssreflect.eqtype.
 Require Import ExtrOcamlNatInt ExtrOcamlString.
 
 Coercion istrue (b : bool) := is_true b.
 
+Lemma neq_nm: forall (n m : nat),  (n <> m) -> ((n < m) \/ (m < n)).
+Proof.
+move => n m H.
+move: (leq_total n m).
+move/orP => H1.
+case H1.
+rewrite (leq_eqVlt n m).
+move/orP.
+elim.
+move/eqP => H2.
+by move: (H H2).
+move => H2.
+by left.
+rewrite (leq_eqVlt m n).
+move/orP.
+elim.
+move/eqP => H2.
+rewrite H2 in H.
+by move: (H (erefl n)).
+move => H2.
+by right.
+Qed.
+
+Lemma neq_S: forall m:nat, m <> m.+1.
+Proof.
+elim.
+by [].
+move => n H.
+case.
+apply H.
+Qed.
+
+Lemma neq_SS: forall (n m:nat), n.+1 <> m.+1 <-> n <> m.
+Proof.
+move => n m.
+split.
+move: n m.
+elim.
+elim.  
+by [].
+elim.
+by [].
+move => n H H1 H2.
+by [].
+move => n H m H1.
+move/eqP in H1.
+rewrite eqSS in H1.
+move/eqP in H1.
+apply H1.
+move => H.
+move/eqP.
+rewrite eqSS.
+move/eqP.
+apply H.
+Qed.
+
+Lemma eq_or_neq: forall (n m:nat), n = m \/ n <> m.
+Proof.
+elim.
+elim.
+by left.  
+by right.
+move => n H.
+case.
+by right.
+move => n0.
+move: (H n0) => H1.
+case H1.
+move => H2.
+left.
+by rewrite H2.
+move => H2.
+right.  
+apply (neq_SS n n0).
+apply H2.
+Qed.
+
+Lemma x_eq_y_and_x_to_y (a b: Prop):
+  (a <-> b) -> a -> b.
+Proof.
+move => H a0.
+apply H.
+apply a0.
+Qed.
+
+Lemma x_eq_y_and_y_to_x (a b: Prop):
+  (a <-> b) -> b -> a.
+Proof.
+move => H b0.
+apply H.  
+apply b0.
+Qed.
+
+Lemma x_eq_y_and_not_x_to_not_y (a b:Prop):
+  (a <-> b) -> (~ a) -> (~ b).                           
+Proof.
+move => H a0 b0.
+apply (a0 (@x_eq_y_and_y_to_x a b H b0)).
+Qed.
+
+Lemma x_eq_y_and_not_y_to_not_x (a b:Prop):
+  (a <-> b) -> (~ b) -> (~ a).                           
+Proof.
+move => H b0 a0.
+apply (b0 (@x_eq_y_and_x_to_y _ _ H a0)).
+Qed.
+
 (** %
 2 つの自然数が等しければ 0 を, 異なれば 1 を返す関数.
  % **)
+
 
 Fixpoint eq_to_bin (n m : nat) : nat :=
 match n, m with
@@ -21,35 +129,47 @@ match n, m with
   | S n', S m' => eq_to_bin n' m'
 end.
 
+Lemma eq_to_bin_nm: forall (n m : nat), 0 = eq_to_bin n.+1 m.+1 -> 0 = eq_to_bin n m.
+Proof.
+move => n.  
+case => [|]//.
+Qed.
+
+Lemma eq_to_bin_nm': 
+  forall n, (forall (m : nat), 0 = eq_to_bin n m.+1 -> n = m.+1)
+            -> (forall (m : nat), 0 = eq_to_bin n m -> n = m).
+Proof.
+move => n H m.
+case m.
+case n => [|]//.
+move => n0.
+apply (H n0).
+Qed.
+
 Lemma eq_to_bin_iff : forall (n m : nat), n = m <-> 0 = eq_to_bin n m.
 Proof.
-induction n.
-induction m.
-split; move => H.
-by [compute].
-by [].
-split; move => H.
-discriminate H.
-compute in H.
-discriminate H.
-induction m.
-split; move => H.
-discriminate H.
-compute in H.
-discriminate H.
+move => n m.
+split.
+move => H.
+rewrite H.
+elim m => [|n0 H1]//.
+case m.
+case n => [|]//.
+elim n.
+case => [|] //.
+  move => n0 H n1.
+move: (eq_to_bin_nm' n0 H) => H1.
 simpl.
-split; move => H.
-apply IHn.
-by [injection H].
-apply IHn in H.
-by [rewrite H].
+move => H2.
+move: (H1 n1 H2).
+move => H3.
+rewrite H3.
+by [].
 Qed.
 
 Lemma eq_to_bin_nn : forall n : nat, eq_to_bin n n = 0.
 Proof.
-move => n.
-apply Logic.eq_sym.
-by [rewrite -eq_to_bin_iff].
+elim => [|n H] //.
 Qed.
 
 (** %
@@ -74,9 +194,7 @@ end.
 
 Lemma C_other2_neq : forall C0 : nat, C0 <> C_other2 C0.
 Proof.
-induction C0.
-by [simpl].
-by [simpl].
+case => [|]//.
 Qed.
 
 (** %
@@ -103,19 +221,22 @@ end.
 Lemma C_other3_neq :
  forall (C0 C1 : nat), C0 <> C_other3 C0 C1 /\ C1 <> C_other3 C0 C1.
 Proof.
-induction C0.
-induction C1.
-by [simpl].
-induction C1.
-by [simpl].
-by [simpl].
-induction C0.
-induction C1.
-by [simpl].
-by [simpl].
-induction C1.
-by [simpl].
-by [simpl].
+move => C0 C1.
+split.
+case C0.
+case C1.
+  by [].
+  case => [|]//.
+  case. 
+  case C1=> [|]//.
+  case C1=> [|]//.
+case C0.
+case C1.
+  by [].
+  case => [|]//.
+  case. 
+  case C1=> [|]//.
+  case C1=> [|]//.
 Qed.
 
 (** %
@@ -666,416 +787,833 @@ Definition Tileable_nm (n m : nat)(b : boundary) :=
 $P_{22}$ は 3 色以上で Tileable という補題.
 % **)
 
+Lemma Boundary_i22: forall b:boundary, Boundary_i 2 2 b (e'_nm 2 2 b).
+Proof.
+move => b.
+case.
+intuition.
+case.
+left.
+split.
+by compute.
+by compute.
+case.
+left.
+split.
+by compute.
+by compute.
+intuition.
+Qed.
+
+Lemma Boundary_j22: forall b:boundary, Boundary_j 2 2 b (e_nm 2 2 b).
+Proof.
+move => b.
+case.
+intuition.
+case.
+left.
+split.
+by compute.
+by compute.
+case.
+left.
+split.
+by compute.
+by compute.
+intuition.
+Qed.
+
+Lemma Brick22_00x : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) = 0 ->
+ eq_to_bin (b 0 2) (b 3 2) = 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite H H0.
+induction j.
+induction i.
+remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
+induction n.
+apply eq_to_bin_iff in Heqn.
+apply (proj1 (C_other3_neq _ _)) in Heqn.
+apply False_ind.
+apply Heqn.
+left.
+repeat split.
+apply C_other3_neq.
+induction i.
+remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
+induction n.
+apply eq_to_bin_iff in Heqn.
+apply (proj1 (C_other3_neq _ _)) in Heqn.
+apply False_ind.
+apply Heqn.
+left.
+split.
+apply eq_to_bin_iff.
+by [rewrite H].
+apply C_other3_neq.
+by [right; right; left].
+induction j.
+induction i.
+remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
+induction n.
+apply eq_to_bin_iff in Heqn.
+apply (not_eq_sym (proj2 (C_other3_neq _ _))) in Heqn.
+apply False_ind.
+apply Heqn.
+left.
+repeat split.
+apply not_eq_sym.
+apply C_other3_neq.
+induction i.
+remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
+induction n.
+apply eq_to_bin_iff in Heqn.
+apply (not_eq_sym (proj2 (C_other3_neq _ _))) in Heqn.
+apply False_ind.
+apply Heqn.
+left.
+split.
+apply eq_to_bin_iff.
+by [rewrite H0].
+apply not_eq_sym.
+apply C_other3_neq.
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22_010 : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) = 0 ->
+ eq_to_bin (b 0 2) (b 3 2) > 0 ->
+ eq_to_bin (b 1 0) (b 1 3) = 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0 H1.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n.
+discriminate.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite H -Heqn H1.
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+right; left.
+repeat split.
+apply C_other2_neq.
+induction i.
+rewrite eq_to_bin_nn.
+right; left.
+repeat split.
+replace (b 3 1) with (b 0 1).
+apply not_eq_sym.
+apply C_other2_neq.
+apply eq_to_bin_iff.
+by [rewrite H].
+by [right; right; left].
+induction j.
+induction i.
+rewrite H1.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right; left.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+by [rewrite H1].
+right; left.
+split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite Heqn -H2 in H0.
+discriminate.
+apply eq_to_bin_iff.
+by [rewrite H1].
+induction i.
+rewrite H1.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n0.
+right; left.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn0.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn0 in H2.
+discriminate.
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22_011 : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) = 0 ->
+ eq_to_bin (b 0 2) (b 3 2) > 0 ->
+ eq_to_bin (b 1 0) (b 1 3) > 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0 H1.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n.
+discriminate.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+discriminate.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite H -Heqn -Heqn0.
+induction j.
+induction i.
+rewrite -Heqn0.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn0 in H2.
+discriminate.
+induction i.
+rewrite -Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+by [rewrite H].
+apply C_other2_neq.
+by [right; right; left].
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
+right; left.
+repeat split.
+apply C_other3_neq.
+right; left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn in H2.
+discriminate.
+induction i.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
+induction n1.
+right; left.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn1 in H2.
+discriminate.
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22_100 : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) > 0 ->
+ eq_to_bin (b 0 2) (b 3 2) = 0 ->
+ eq_to_bin (b 1 0) (b 1 3) = 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0 H1.
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+discriminate.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite -Heqn H0 H1.
+induction j.
+induction i.
+rewrite H1.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right; left.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+by [rewrite H1].
+right; left.
+split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn in H2.
+discriminate.
+apply eq_to_bin_iff.
+by [rewrite H1].
+induction i.
+rewrite H1.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n0.
+right; left.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn0.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn0 in H2.
+discriminate.
+by [right; right; left].
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+right; left.
+repeat split.
+apply C_other2_neq.
+induction i.
+rewrite eq_to_bin_nn.
+right; left.
+repeat split.
+replace (b 3 2) with (b 0 2).
+apply not_eq_sym.
+apply C_other2_neq.
+apply eq_to_bin_iff.
+by [rewrite H0].
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22_101 : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) > 0 ->
+ eq_to_bin (b 0 2) (b 3 2) = 0 ->
+ eq_to_bin (b 1 0) (b 1 3) > 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0 H1.
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+discriminate.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+discriminate.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite -Heqn H0 -Heqn0.
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
+right; left.
+repeat split.
+apply C_other3_neq.
+right; left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn in H2.
+discriminate.
+induction i.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
+induction n1.
+right; left.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn1 in H2.
+discriminate.
+by [right; right; left].
+induction j.
+induction i.
+rewrite -Heqn0.
+left.
+repeat split.
+move => H2.
+apply eq_to_bin_iff in H2.
+rewrite -Heqn0 in H2.
+discriminate.
+induction i.
+rewrite -Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+by [rewrite H0].
+apply not_eq_sym.
+apply C_other2_neq.
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22_11x : forall b : boundary,
+ eq_to_bin (b 0 1) (b 3 1) > 0 ->
+ eq_to_bin (b 0 2) (b 3 2) > 0 ->
+ Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b H H0.
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+discriminate.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n0.
+discriminate.
+rewrite /Brick/e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+rewrite -Heqn -Heqn0.
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right; left.
+repeat split.
+apply C_other3_neq.
+right; left.
+repeat split.
+move => H1.
+apply eq_to_bin_iff in H1.
+rewrite -Heqn in H1.
+discriminate.
+induction i.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n1.
+right; left.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H1.
+apply eq_to_bin_iff in H1.
+rewrite -Heqn1 in H1.
+discriminate.
+by [right; right; left].
+induction j.
+induction i.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n1.
+right; left.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H1.
+apply eq_to_bin_iff in H1.
+rewrite -Heqn1 in H1.
+discriminate.
+induction i.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (b 1 0) (b 1 3)).
+right; left.
+repeat split.
+apply not_eq_sym.
+apply C_other3_neq.
+right; left.
+repeat split.
+move => H1.
+apply eq_to_bin_iff in H1.
+rewrite -Heqn0 in H1.
+discriminate.
+by [right; right; left].
+by [repeat right].
+Qed.
+
+Lemma Brick22': forall b : boundary,  Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b.
+assert (forall (n m : nat), (S n) = m -> m > 0).
+move => n m H.
+by [rewrite -H].
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n.
+apply (Brick22_00x b (Logic.eq_sym Heqn) (Logic.eq_sym Heqn0)).
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+apply (Brick22_010 b (Logic.eq_sym Heqn) (H _ _ Heqn0) (Logic.eq_sym Heqn1)).
+apply (Brick22_011 b (Logic.eq_sym Heqn) (H _ _ Heqn0) (H _ _ Heqn1)).
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n0.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+apply (Brick22_100 b (H _ _ Heqn) (Logic.eq_sym Heqn0) (Logic.eq_sym Heqn1)).
+apply (Brick22_101 b (H _ _ Heqn) (Logic.eq_sym Heqn0) (H _ _ Heqn1)).
+apply (Brick22_11x b (H _ _ Heqn) (H _ _ Heqn0)).
+Qed.
+
+
+Lemma Brick22_11: forall b: boundary, forall (i j:nat),
+    (i = 0) -> (j = 0) -> 
+    ((e_nm 2 2 b i (S j)) = (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) <> (e'_nm 2 2 b (S i) (S j))
+    \/
+    (e_nm 2 2 b i (S j)) <> (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) = (e'_nm 2 2 b (S i) (S j))).
+Proof.
+move => b i j Hi Hj.
+rewrite Hi Hj.
+rewrite /e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+induction (eq_to_bin (b 0 2) (b 3 2)).
+remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
+induction n.
+apply eq_to_bin_iff in Heqn0.
+apply (proj1 (C_other3_neq _ _)) in Heqn0.
+apply False_ind.
+apply Heqn0.
+left.
+repeat split.
+apply C_other3_neq.
+induction (eq_to_bin (b 1 0) (b 1 3)).
+rewrite eq_to_bin_nn.
+right.
+repeat split.
+apply C_other2_neq.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n1.
+right.
+split.
+apply C_other2_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+induction (eq_to_bin (b 0 2) (b 3 2)).
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite -Heqn0.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn0.
+right.
+split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+apply eq_to_bin_iff.
+apply Heqn0.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
+right.
+repeat split.
+apply C_other3_neq.
+right.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right.
+repeat split.
+apply C_other3_neq.
+right.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+Qed.
+
+Lemma Brick22_12: forall b: boundary, forall (i j:nat),
+    (i = 0) -> (j = 1) -> 
+    ((e_nm 2 2 b i (S j)) = (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) <> (e'_nm 2 2 b (S i) (S j))
+    \/
+    (e_nm 2 2 b i (S j)) <> (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) = (e'_nm 2 2 b (S i) (S j))).
+Proof.
+move => b i j Hi Hj.
+rewrite Hi Hj.
+rewrite /e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n.
+induction (eq_to_bin (b 0 1) (b 3 1)).
+remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
+induction n.
+apply eq_to_bin_iff in Heqn0.
+apply (not_eq_sym (proj2 (C_other3_neq _ _))) in Heqn0.
+apply False_ind.
+apply Heqn0.
+left.
+repeat split.
+apply not_eq_sym.
+apply C_other3_neq.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite eq_to_bin_nn.
+right.
+repeat split.
+apply C_other2_neq.
+rewrite -Heqn0.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn0 in H.
+discriminate.
+induction (eq_to_bin (b 0 1) (b 3 1)).
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite -Heqn0.
+induction (eq_to_bin (b 2 0) (b 2 3)).
+right.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn0.
+right.
+split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+apply eq_to_bin_iff.
+apply Heqn0.
+rewrite eq_to_bin_nn.
+induction (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
+right.
+repeat split.
+apply C_other3_neq.
+right.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n1.
+rewrite eq_to_bin_nn.
+right.
+split.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+Qed.
+
+Lemma Brick22_21: forall b: boundary, forall (i j:nat),
+    (i = 1) -> (j = 0) -> 
+    ((e_nm 2 2 b i (S j)) = (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) <> (e'_nm 2 2 b (S i) (S j))
+    \/
+    (e_nm 2 2 b i (S j)) <> (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) = (e'_nm 2 2 b (S i) (S j))).
+Proof.
+move => b i j Hi Hj.
+rewrite Hi Hj.
+rewrite /e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+remember (eq_to_bin (b 0 1) (b 3 1)).
+induction n.
+induction (eq_to_bin (b 0 2) (b 3 2)).
+remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
+induction n.
+apply eq_to_bin_iff in Heqn0.
+apply (proj1 (C_other3_neq _ _)) in Heqn0.
+apply False_ind.
+apply Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+apply Heqn.
+apply C_other3_neq.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite eq_to_bin_nn.
+right.
+repeat split.
+replace (b 3 1) with (b 0 1).
+apply not_eq_sym.
+apply C_other2_neq.
+apply eq_to_bin_iff.
+apply Heqn.
+rewrite -Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+apply Heqn.
+apply C_other2_neq.
+induction (eq_to_bin (b 0 2) (b 3 2)).
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite -Heqn0.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n0.
+right.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
+induction n1.
+right.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n1.
+right.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+Qed.
+
+Lemma Brick22_22: forall b: boundary, forall (i j:nat),
+    (i = 1) -> (j = 1) -> 
+    ((e_nm 2 2 b i (S j)) = (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) <> (e'_nm 2 2 b (S i) (S j))
+    \/
+    (e_nm 2 2 b i (S j)) <> (e_nm 2 2 b (S i) (S j)) /\ (e'_nm 2 2 b (S i) j) = (e'_nm 2 2 b (S i) (S j))).
+Proof.
+move => b i j Hi Hj.
+rewrite Hi Hj.
+rewrite /e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12/eq_to_if.
+remember (eq_to_bin (b 0 2) (b 3 2)).
+induction n.
+induction (eq_to_bin (b 0 1) (b 3 1)).
+remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
+induction n.
+apply eq_to_bin_iff in Heqn0.
+apply (not_eq_sym (proj2 (C_other3_neq _ _))) in Heqn0.
+apply False_ind.
+apply Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+apply Heqn.
+apply not_eq_sym.
+apply C_other3_neq.
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite eq_to_bin_nn.
+right.
+repeat split.
+replace (b 3 2) with (b 0 2).
+apply not_eq_sym.
+apply C_other2_neq.
+apply eq_to_bin_iff.
+apply Heqn.
+rewrite -Heqn0.
+left.
+split.
+apply eq_to_bin_iff.
+apply Heqn.
+apply not_eq_sym.
+apply C_other2_neq.
+induction (eq_to_bin (b 0 1) (b 3 1)).
+remember (eq_to_bin (b 1 0) (b 1 3)).
+induction n0.
+rewrite -Heqn0.
+remember (eq_to_bin (b 2 0) (b 2 3)).
+induction n0.
+right.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+rewrite eq_to_bin_nn.
+remember (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
+induction n1.
+right.
+split.
+apply not_eq_sym.
+apply C_other3_neq.
+apply eq_to_bin_iff.
+apply Heqn1.
+left.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn1 in H.
+discriminate.
+induction (eq_to_bin (b 1 0) (b 1 3)).
+rewrite eq_to_bin_nn.
+right.
+repeat split.
+apply not_eq_sym.
+apply C_other3_neq.
+right.
+repeat split.
+move => H.
+apply eq_to_bin_iff in H.
+rewrite -Heqn in H.
+discriminate.
+Qed.
+
+Lemma Brick22: forall b,  Brick 2 2 (e_nm 2 2 b) (e'_nm 2 2 b).
+Proof.
+move => b.
+case.
+case.
+move: (Brick22_11 b 0 0 erefl erefl) => H.
+by case H => [H1|H2]; intuition.
+case.
+move: (Brick22_12 b 0 1 erefl erefl) => H.
+case H => [H1|H2]; intuition.
+intuition.
+case.
+case.
+move: (Brick22_21 b 1 0 erefl erefl) => H.
+by case H => [H1|H2]; intuition.
+case.
+move: (Brick22_22 b 1 1 erefl erefl) => H.
+by case H => [H1|H2]; intuition.
+intuition.
+intuition.
+Qed.
+
 Lemma P22_Tileable_nm : forall b : boundary, Tileable_nm 2 2 b.
 Proof.
 move => b.
 repeat split.
-induction i.
-by [right; left].
-induction i.
-left.
-split.
-by [compute].
-by [compute].
-induction i.
-left.
-split.
-by [compute].
-by [compute].
-by [repeat right].
-induction j.
-by [right; left].
-induction j.
-left.
-split.
-by [compute].
-by [compute].
-induction j.
-left.
-split.
-by [compute].
-by [compute].
-by [repeat right].
-rewrite /e'_nm/e_nm/enm_to_emn/bnm_to_bmn/e'_n2/e_n2/e'_22/e_22/e'_12/eq_to_if.
-simpl.
-move => i j.
-simpl.
-induction j.
-induction i.
-remember (eq_to_bin (b 0 1) (b 3 1)).
-induction n.
-induction (eq_to_bin (b 0 2) (b 3 2)).
-remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
-induction n.
-apply eq_to_bin_iff in Heqn0.
-right; left.
-split.
-apply C_other2_neq.
-apply Heqn0.
-simpl.
-left.
-split.
-by [].
-apply C_other3_neq.
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite eq_to_bin_nn.
-right; left.
-split.
-apply C_other2_neq.
-by [].
-rewrite -Heqn0.
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn0.
-discriminate Heqn0.
-induction (eq_to_bin (b 0 2) (b 3 2)).
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite -Heqn0.
-apply eq_to_bin_iff in Heqn0.
-rewrite Heqn0.
-induction (eq_to_bin (b 2 0) (b 2 3)).
-right; left.
-split.
-apply C_other3_neq.
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-by [].
-rewrite eq_to_bin_nn.
-induction (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
-right; left.
-split.
-apply C_other3_neq.
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-by [].
-rewrite eq_to_bin_nn.
-induction (eq_to_bin (b 2 0) (b 2 3)).
-right; left.
-split.
-apply C_other3_neq.
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-by [].
-induction i.
-remember (eq_to_bin (b 0 1) (b 3 1)).
-induction n.
-apply eq_to_bin_iff in Heqn.
-rewrite Heqn.
-induction (eq_to_bin (b 0 2) (b 3 2)).
-remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
-induction n.
-apply eq_to_bin_iff in Heqn0.
-apply False_ind.
-elim (C_other3_neq (b 1 0) (b 1 3)) => H H0.
-apply (H Heqn0).
-left.
-split.
-by [].
-apply C_other3_neq.
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite eq_to_bin_nn.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other2_neq.
-by [].
-rewrite -Heqn0.
-left.
-split.
-by [].
-apply C_other2_neq.
-induction (eq_to_bin (b 0 2) (b 3 2)).
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite -Heqn0.
-remember (eq_to_bin (b 2 0) (b 2 3)).
-induction n0.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-by [].
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn1.
-discriminate Heqn1.
-rewrite eq_to_bin_nn.
-remember (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
-induction n1.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-by [].
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn1.
-discriminate Heqn1.
-rewrite eq_to_bin_nn.
-remember (eq_to_bin (b 2 0) (C_other2 (b 2 3))).
-induction n1.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-remember (eq_to_bin (C_other2 (b 2 3)) (b 2 3)).
-induction n1.
-apply eq_to_bin_iff in Heqn0.
-rewrite Heqn0.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-by [].
-left.
-split.
-by [].
-apply not_eq_sym.
-apply C_other2_neq.
-remember (eq_to_bin (b 2 0) (b 2 3)).
-induction n2.
-apply eq_to_bin_iff in Heqn2.
-rewrite Heqn2.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-by [].
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn2.
-discriminate Heqn2.
-by [right; right; left].
-induction i.
-remember (eq_to_bin (b 0 2) (b 3 2)).
-induction n.
-induction (eq_to_bin (b 0 1) (b 3 1)).
-remember (eq_to_bin (b 1 0) (C_other3 (b 1 0) (b 1 3))).
-induction n.
-apply eq_to_bin_iff in Heqn0.
-elim (C_other3_neq (b 1 0) (b 1 3)) => H H0.
-apply False_ind.
-apply (H Heqn0).
-remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
-induction n0.
-apply eq_to_bin_iff in Heqn1.
-elim (C_other3_neq (b 1 0) (b 1 3)) => H H0.
-rewrite Heqn1 in H0.
-apply False_ind.
-by [apply H0].
-induction j.
-left.
-split.
-by [].
-apply not_eq_sym.
-apply C_other3_neq.
-by [repeat right].
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite eq_to_bin_nn.
-right; left.
-split.
-apply C_other2_neq.
-induction j.
-by [].
-by [].
-rewrite -Heqn0.
-induction j.
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn0.
-discriminate Heqn0.
-by [repeat right].
-induction (eq_to_bin (b 0 1) (b 3 1)).
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite -Heqn0.
-apply eq_to_bin_iff in Heqn0.
-rewrite Heqn0.
-induction (eq_to_bin (b 2 0) (b 2 3)).
-induction j.
-right; left.
-split.
-apply C_other3_neq.
-by [].
-by [repeat right].
-induction j.
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-by [].
-by [repeat right].
-rewrite eq_to_bin_nn.
-induction (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
-right; left.
-split.
-apply C_other3_neq.
-induction j.
-by [].
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-induction j.
-by [].
-by [].
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n1.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-induction (eq_to_bin (b 2 3) (b 2 3)).
-right; left.
-split.
-apply C_other3_neq.
-induction j.
-by [].
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-induction j.
-by [].
-by [].
-induction j.
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn1.
-discriminate Heqn1.
-by [repeat right].
-induction i.
-remember (eq_to_bin (b 0 2) (b 3 2)).
-induction n.
-apply eq_to_bin_iff in Heqn.
-rewrite Heqn.
-induction (eq_to_bin (b 0 1) (b 3 1)).
-remember (eq_to_bin (C_other3 (b 1 0) (b 1 3)) (b 1 3)).
-induction n.
-apply eq_to_bin_iff in Heqn0.
-elim (C_other3_neq (b 1 0) (b 1 3)) => H H0.
-rewrite Heqn0 in H0.
-apply False_ind.
-by [apply H0].
-induction j.
-left.
-split.
-by [].
-apply not_eq_sym.
-apply C_other3_neq.
-by [repeat right].
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite eq_to_bin_nn.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other2_neq.
-induction j.
-by [].
-by [].
-rewrite -Heqn0.
-induction j.
-left.
-split.
-by [].
-apply not_eq_sym.
-apply C_other2_neq.
-by [repeat right].
-induction (eq_to_bin (b 0 1) (b 3 1)).
-remember (eq_to_bin (b 1 0) (b 1 3)).
-induction n0.
-rewrite -Heqn0.
-remember (eq_to_bin (b 2 0) (b 2 3)).
-induction n0.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-induction j.
-by [].
-by [].
-induction j.
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn1.
-discriminate Heqn1.
-by [repeat right].
-rewrite eq_to_bin_nn.
-remember (eq_to_bin (C_other2 (b 2 0)) (b 2 3)).
-induction n1.
-apply eq_to_bin_iff in Heqn1.
-rewrite Heqn1.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-induction j.
-by [].
-by [].
-induction j.
-left.
-split.
-by [].
-move => H.
-rewrite H eq_to_bin_nn in Heqn1.
-discriminate Heqn1.
-by [repeat right].
-induction (eq_to_bin (b 1 0) (b 1 3)).
-rewrite eq_to_bin_nn.
-right; left.
-split.
-apply not_eq_sym.
-apply C_other3_neq.
-induction j.
-by [].
-by [].
-right; left.
-split.
-move => H.
-rewrite H eq_to_bin_nn in Heqn.
-discriminate Heqn.
-induction j.
-by [].
-by [].
-by [right; right; left].
+apply Boundary_i22.
+apply Boundary_j22.
+apply Brick22.
 Qed.
 
 (** %

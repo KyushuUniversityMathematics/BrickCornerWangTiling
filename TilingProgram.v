@@ -1,4 +1,4 @@
-(* 2015/02/19 Toshiaki Matsushima *)
+(* 2015/02/25 Toshiaki Matsushima *)
 
 (** %
 \section{Preference}
@@ -8,7 +8,7 @@ Require Import Ssreflect.ssreflect Ssreflect.ssrnat Ssreflect.ssrbool Ssreflect.
 Require Import ExtrOcamlNatInt ExtrOcamlString.
 
 (** %
-\verb|!=|を, 
+Change the definition of \verb|!=| for Prop. 
  % **)
 
 Notation "n '!=' m" := ((n == m) = false).
@@ -22,7 +22,7 @@ by [right].
 Qed.
 
 (** %
-特定の$C0$以外なら何でもいい場合は, \verb|C_other2 C0|で他の色を求める.
+If you want a color besides $C0$, you can use \verb|C_other2 C0|.
  % **)
 
 Definition C_other2 (C0 : nat) : nat :=
@@ -42,7 +42,7 @@ case => [|]//.
 Qed.
 
 (** %
-3色以上使える環境で, 色$C0$と$C1$が指定されたとき, それらと異なる色を返す関数.
+If you want a color besides $C0$ and $C1$, you can use \verb|C_other3 C0 C1|.
  % **)
 
 Definition C_other3 (C0 C1 : nat) : nat :=
@@ -111,14 +111,14 @@ Qed.
 
 (** %
 \section{Wang tiling}
-境界条件とエッジ関数は, ともに``$x$座標と$y$座標から色を返す関数''である.
+The boundary and edge functions return a color from $x$ and $y$ coordinates.
  % **)
 
 Definition boundary := nat -> nat -> nat.
 Definition edge := nat -> nat -> nat.
 
 (** %
-テスト用にプログラムを用いたタイリングを表示する関数も作ってみる.
+The functions below show the tiling result using edge functions.
  % **)
 
 Definition null {A : Type} (x : A): A.
@@ -146,17 +146,18 @@ Fixpoint e_e' (n m : nat)(e e' : edge) : list (list nat) :=
    | S n' => (e_e' n' m e e') ++ ((e'_i m e' (S n')) :: (e_i m e (S n')) :: nil)
  end.
 Definition tiling (n m : nat)(b : boundary)(e_ e'_ : boundary -> edge) := e_e' n m (e_ b) (e'_ b).
+
 (** %
-長方形サイズ$n \times m$, 境界条件\verb|b|, エッジ関数\verb|e_|, \verb|e'_|から実際のタイリングを求める関数.
+The functions below returns edge functions $e$ and $e'$ from the size of rectangular region $n \times m$ and boundary function $b$.
  % **)
 
 (** %
-まずは$P_{12}$をタイリングする関数から. \verb|e|は横エッジ用, \verb|e'|は縦エッジ用.
+\verb|e_12| and \verb|e'_12| are tiling functions for $P_{12}$ ($1 \times 2$ region).
  % **)
 
 Definition e_12 (b : boundary) : edge.
 (** %
-横エッジはそのまま, \verb|e 0 j = b 0 j|, \verb|e 1 j = b 2 j|とすればよい.
+The horizontal edges satisfy \verb|e 0 j = b 0 j| and \verb|e 1 j = b 2 j|.
  % **)
 
 rewrite /edge.
@@ -169,7 +170,7 @@ Defined.
 
 Definition e'_12 (b : boundary) : edge.
 (** %
-\verb|e' 1 0 = b 1 0|, \verb|e' 1 2 = b 1 3|なので, $j$でinduction.
+The vertical edges satisfy \verb|e' 1 0 = b 1 0| and \verb|e' 1 2 = b 1 3|.
  % **)
 
 rewrite /edge.
@@ -189,7 +190,7 @@ end).
 Defined.
 
 (** %
-次に$P_{22}$をタイリングする関数.
+The followings are tiling functions for $P_{22}$.
  % **)
 
 Definition e_22 (b : boundary) : edge.
@@ -233,7 +234,7 @@ Defined.
 
 Definition e'_22 (b : boundary) : edge.
 (** %
-上で定義した\verb|e_22|に基づいて定義する.
+Define \verb|e'_22| using \verb|e_22|.
  % **)
 
 rewrite /edge.
@@ -256,7 +257,7 @@ end
 Defined.
 
 (** %
-$P_{(n+1)m}$の境界条件を, $P_{nm}$と$P_{1m}$に分割し, 前者の境界条件を出す関数.
+Divide the $(n+1) \times m$ boundary $b$ to $n \times m$ boundary \verb|bSnm_to_bnm| $b$ and $1 \times m$ boundary \verb|bSnm_to_b1m| $b$.
 % **)
 
 Definition bSnm_to_bnm (m : nat) : boundary -> boundary.
@@ -277,10 +278,6 @@ match m with
          end
 end).
 Defined.
-
-(** %
-$P_{(n+1)m}$の境界条件を, $P_{nm}$と$P_{1m}$に分割し, 後者の境界条件を出す関数.
-% **)
 
 Definition bSnm_to_b1m (m : nat) : boundary -> boundary.
 move => b.
@@ -303,11 +300,13 @@ end).
 Defined.
 
 (** %
-\verb|bSnm_to_b1m|で出てくる$P_{1m}$をタイリングする関数.
+The followings are tiling functions for $1 \times m$ boundary obtained from \verb|bSnm_to_b1m|.
 % **)
 
 Definition e_1m (b : boundary) : edge.
-(** % 横エッジはそのまま, \verb|e 0 j = b 0 j|, \verb|e 1 j = b 2 j| とすればよい % **)
+(** %
+The horizontal edges satisfy \verb|e 0 j = b 0 j| and \verb|e 1 j = b 2 j|.
+ % **)
 
 rewrite /edge.
 apply (fun i j : nat =>
@@ -318,7 +317,9 @@ end).
 Defined.
 
 Definition e'_1m (m : nat)(b : boundary) : edge.
-(** % 縦エッジは, \verb|b 1 0 = e' 1 0 <> e' 1 1 <> e' 1 2 = ... = e' 1 m = b 1 (S m)| にする % **)
+(** %
+We define the colors of vertical edges as \verb|b 1 0 = e' 1 0 <> e' 1 1 <> e' 1 2 = ... = e' 1 m = b 1 (S m)|.
+ % **)
 
 rewrite /edge.
 apply (fun i j : nat =>
@@ -333,7 +334,7 @@ end).
 Defined.
 
 (** %
-$P_{n2}$ を Tiling する関数.
+The definitions below are tiling functions for $P_{n2}$.
 % **)
 
 Fixpoint e_n2 (n : nat) : boundary -> edge :=
@@ -362,7 +363,7 @@ Fixpoint e'_n2 (n : nat) : boundary -> edge :=
  end.
 
 (** %
-$P_{nm}$ での境界条件および Tiling 関数を $P_{mn}$ のものに置き換える関数. やっていることはただの引数順序の入れ替え. 横エッジ \verb|e| と縦エッジ \verb|e'| も入れ替える.
+We can change $P_{nm}$ boundary and edge functions for $P_{mn}$ ones.
 % **)
 
 Definition bnm_to_bmn (b : boundary) : boundary.
@@ -376,7 +377,7 @@ apply (e (bnm_to_bmn b) j i).
 Defined.
 
 (** %
-3 色以上, 2 $\times$ 2 以上のときに, $P_{nm}$ を Tiling する関数.
+The followings are tiling functions for $P_{nm}$ ($|C| \geq 3 \land n, m \geq 2$).
 % **)
 
 Fixpoint e_nm (n m : nat) : boundary -> edge :=
@@ -403,10 +404,6 @@ Fixpoint e'_nm (n m : nat) : boundary -> edge :=
                | S i' => e'_nm n' m (bSnm_to_bnm m b) i' j
              end
  end.
-
-(** %
-Tiling 関数を \verb|e_nm|, \verb|e'_nm| に固定したものを定義.
-% **)
 
 Definition tiling_nm (n m : nat)(b : boundary) :=
  tiling n m b (e_nm n m) (e'_nm n m).
@@ -447,7 +444,7 @@ Compute (tiling 1 2 (fun _ _ => 0) e_12 e'_12).
     :: (^ :: 0 :: ^ :: 0 :: ^ :: nil) :: nil
      : list (list nat)
 \end{verbatim}
-\verb|#| がタイルを表す. つまり \verb|#| の上下左右が Brick Corner Wang Tiling の条件を満たせばよい.
+\verb|#| and \verb|^| express the center and the corner of tiles respectively.
  % **)
 
 Compute (tiling 1 2 (fun _ j => match j with 1 => 2 | _ => 1 end) e_12 e'_12).
@@ -637,7 +634,7 @@ Compute (tiling_nm 4 4 boundary44c).
 
 (** %
 \section{Main theorems}
-WangTiling.v から, ``Tiling 可能'' の定義をインポート. 以下の 3 つを全て同時に満たせば Tiling できていることになる.
+The definitions below are the conditions for valid brick Wang tiling.
 % **)
 
 Definition Boundary_i (n m : nat)(b : boundary)(e' : edge) :=
@@ -654,6 +651,11 @@ Definition Valid (n m : nat)(b : boundary)(e e' : edge) :=
 Definition Valid_nm (n m : nat)(b : boundary) :=
  Boundary_i n m b (e'_nm n m b) /\ Boundary_j n m b (e_nm n m b) /\
  Brick n m (e_nm n m b) (e'_nm n m b).
+
+(** %
+These tactics help us to prove the properties of tiling.
+% **)
+
 Ltac e_unfold := rewrite /e_nm/e'_nm/enm_to_emn/e_n2/e'_n2/bnm_to_bmn/e'_22/e_22/e'_12.
 Ltac eq_rewrite :=
  repeat match goal with
@@ -683,7 +685,7 @@ Ltac Brick_auto := intros; e_unfold; eq_rewrite; move => i j;
         end.
 
 (** %
-$P_{22}$ は 3 色以上で Valid という補題.
+Lemmas of the validity of $P_{22}$ tiling.
 % **)
 
 Lemma Boundary_i22 : forall b : boundary, Boundary_i 2 2 b (e'_nm 2 2 b).
@@ -840,7 +842,7 @@ apply Brick22.
 Qed.
 
 (** %
-$m \geq 2$ で $P_{2m}$ が Valid なら, $P_{2(m+1)}$ も Valid という補題.
+If $P_{2m}$ ($m \geq 2$) tiling is valid, then $P_{2(m+1)}$ one is also valid.
 % **)
 
 Lemma replace_e_n2 : forall m : nat,
@@ -989,7 +991,7 @@ apply H0.
 Qed.
 
 (** %
-$m \geq 2$ なら, $P_{2m}$ は 3 色以上で Valid という補題.
+If $m \geq 2$, then $P_{2m}$ tiling is always valid.
 % **)
 
 Lemma P2m_Valid_nm : forall (b : boundary)(m : nat), 2 <= m -> Valid_nm 2 m b.
@@ -1012,7 +1014,7 @@ apply H.
 Qed.
 
 (** %
-$n,m \geq 2$ で $P_{nm}$ が Tileable なら, $P_{(n+1)m}$ も Tileable という補題.
+If $P_{nm}$ ($n, m \geq 2$) tiling is valid, then $P_{(n+1)m}$ one is also valid.
 % **)
 
 Lemma replace_e_nm : forall (b : boundary)(n m : nat),
@@ -1157,7 +1159,7 @@ apply H1.
 Qed.
 
 (** %
-$n,m \geq 2$ なら, $P_{nm}$ は 3 色以上で Tileable という補題.
+If $n, m \geq 2$, then $P_{nm}$ tiling is always valid.
 % **)
 
 Theorem e_nm_Valid : forall (b : boundary)(n m : nat),
@@ -1197,7 +1199,7 @@ Qed.
 
 (** %
 \section{Export to Mathematica}
-Mathematica へのエクスポートのための設定
+You can export the tiling results to Mathematica (Use \verb|/old_files/Tiling.nb|).
 % **)
 
 Definition null_list {A : Type} (l m : list A) : Prop.
@@ -1233,7 +1235,7 @@ Definition tiling_nm2 (n m : nat)(b : boundary) :=
 Compute (tiling_nm2 4 4 (fun i j => match j with 0 => match i with 2 | 3 => 3 | _ => 4 end | 1 => 2 | 3 => 1 | _ => match i with 0 => 0 | _ => 5 end end)).
 
 (** %
-どうしても \verb|=| と \verb|: Prop| が邪魔という人向け
+You can remove \verb|=| and \verb|: Prop|.
 % **)
 
 Ltac print := compute; match goal with |- ?x => idtac x end.

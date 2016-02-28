@@ -607,6 +607,10 @@ apply (Brick22_nnne b H H0 H1 H2).
 apply (Brick22_nnnn b H H0 H1 H2).
 Qed.
 
+(** %
+{\bf Lemma 3.} {\it (3) $P_{22}$ is tileable if $|C| \geq 3$.}
+% **)
+
 Lemma P22_Valid_nm : forall b : boundary, Valid_nm 2 2 b.
 Proof.
 move => b.
@@ -761,6 +765,19 @@ by_or.
 by_or.
 apply H1.
 Qed.
+
+(** %
+The lemma below corresponds to: \\
+{\bf Lemma 3.}
+{\it (2)
+Let $W_C$ be the set of all brick Wang tiles for a given color set $C$.
+Let $n \ge 2$, and let $m \ge 2$.
+Let $P_{nm}$ be a rectangular region, and
+let $b_{nm}$ be a boundary coloring over $P_{nm}$.
+Then, there exist $w_{i} \in W_C$ $(1 \le i \le n)$, such that
+$w_{i}(l)=b_{nm}(i,0)$, $w_{1}(t)=b_{nm}(0,1)$,
+and $w_{n}(b)=b_{nm}(1,n+1)$.}
+% **)
 
 Lemma Valid_nm_ind_2m : forall (b : boundary)(m : nat),
  2 <= m -> (forall b' : boundary, Valid_nm 2 m b') -> Valid_nm 2 (S m) b.
@@ -944,6 +961,19 @@ apply H6.
 apply H4.
 Qed.
 
+(** %
+The lemma below corresponds to: \\
+{\bf Lemma 3.}
+{\it (1)
+Let $W_C$ be the set of all brick Wang tiles for a given color set $C$.
+Let $n \ge 2$, and let $m \ge 2$.
+Let $P_{nm}$ be a rectangular region, and
+let $b_{nm}$ be a boundary coloring over $P_{nm}$.
+Then, there exist $w_{j} \in W_C$ $(1 \le j \le m)$, such that
+$w_{j}(t)=b_{nm}(0,j)$, $w_{1}(l)=b_{nm}(1,0)$,
+and $w_{m}(r)=b_{nm}(m+1,1)$.}
+% **)
+
 Lemma Valid_nm_ind_nm : forall (b : boundary)(n m : nat),
  2 <= n -> 2 <= m -> (forall b' : boundary, Valid_nm n m b') ->
  Valid_nm (S n) m b.
@@ -993,7 +1023,7 @@ Qed.
 {\bf Theorem 1.} {\it If $|C| \geq 3$, then a rectangular region $P_{nm}$ is tileable for any $n \geq 2$ and $m \geq 3$.}
 % **)
 
-Theorem P22_Tileable : forall (b : boundary)(n m : nat),
+Theorem Pnm_Tileable : forall (b : boundary)(n m : nat),
  2 <= n -> 2 <= m -> exists (e e' : edge), Valid n m b e e'.
 Proof.
 move => b n m H0 H1.

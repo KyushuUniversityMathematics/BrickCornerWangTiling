@@ -14,3 +14,6 @@ Verification of A Brick Corner Wang Tiling Algorithm
           rsvg-convert -f pdf -o b44a.pdf b44a.svg
 
 <img src="https://github.com/KyushuUniversityMathematics/BrickCornerWangTiling/raw/master/images/b44a.png"/>
+
+Please look at the following paper for details:
+* "Verification of a brick Wang tiling algorithm" by T.Matsushima, Y.Mizoguchi, A.D.-Jourdan in Proc. 7th International Symposium on Symbolic Computation in Software Science (SCSS2016), EPiC Series in Computing, Vol.39, pp.107-116, 2016, http://easychair.org/publications/paper/Verification_of_a_brick_Wang_tiling_algorithm 
